@@ -12,6 +12,7 @@ import { LibroPageComponent } from './pages/libro-page/libro-page.component';
 import { PedidoPageComponent } from './pages/pedido-page/pedido-page.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -31,7 +32,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

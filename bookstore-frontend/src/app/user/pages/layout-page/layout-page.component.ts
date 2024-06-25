@@ -18,30 +18,25 @@ export class LayoutPageComponent {
       url: './list-autores'
     },
     {
-      label: 'Agregar Autor',
-      icon: 'group_add',
-      url: './new-autor'
-    },
-    {
       label: 'Libros',
       icon: 'book_2',
       url: './list-libros'
     },
     {
-      label: 'Agregar Libro',
-      icon: 'auto_stories',
-      url: './new-book'
+      label: 'Carrito',
+      icon: 'shopping_cart',
+      url: './cart'
     },
     {
-      label: 'Historial',
-      icon: 'local_shipping',
-      url: './list-pedidos'
+      label: 'Mis Pedidos',
+      icon: 'inventory_2',
+      url: './list-mis-pedidos'
     },
     {
-      label: 'Libros Más Vendidos',
-      icon: 'trending_up',
-      url: './libros-vendidos'
-    },
+      label: 'Mi Usuario',
+      icon: 'person',
+      url: './mi-usuario'
+    }
   ]
 
   constructor( private authService: AuthService,
