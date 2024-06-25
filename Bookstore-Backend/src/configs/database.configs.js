@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const host = 'localhost';
-const port = '27017';
-const database = 'Paises'; // pendiente de definir
+const host = process.env.DATABASE_HOST;
+const port = process.env.DATABASE_PORT;
+const database = process.env.DATABASE_NAME;
 
 async function connect() {
     try {
@@ -11,7 +12,7 @@ async function connect() {
         });
         console.log('Conectado a la base de datos: '+ database);
     } catch (error) {
-        console.error('Error de conecxion', error);
+        console.error('Error de conexion', error);
     }
 }
 
