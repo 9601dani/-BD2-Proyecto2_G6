@@ -3,6 +3,14 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@admin/*":["app/admin/*"],
+      "@shared/*":["app/shared/*"],
+      "@models/*":["app/models/*"],
+      "@envs/*":["environments/*"],
+      "@material/*":["app/material/*"],
+    },
+
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
