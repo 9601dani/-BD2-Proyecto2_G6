@@ -1,9 +1,10 @@
-const mongose = require ('mongoose');
-const Schema = mongose.Schema;
-const model = mongose.model;
+const mongoose = require ('mongoose');
+const Schema = mongoose.Schema;
+const model = mongoose.model;
 
 const booksSchema = new Schema({
 
+    _id: Schema.ObjectId,
     titulo: String,
     autor: String,
     descripcion: String,

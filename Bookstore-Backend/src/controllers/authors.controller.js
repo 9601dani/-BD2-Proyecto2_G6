@@ -27,10 +27,16 @@ const deleteAuthor = async (req, res) => {
     res.json({ deleted: !!authorDeleted });
 };
 
+const updateAuthor = async (req, res) => {
+    const updated = await Author.updateOne({ _id: req.params }, req.body);
+    res.json({ updated: !!updated });
+}
+
 module.exports = {
     getAll,
     getAuthorsActive,
     getAuthorById,
     addAuthor,
-    deleteAuthor
+    deleteAuthor,
+    updateAuthor
 }
