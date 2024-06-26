@@ -18,6 +18,8 @@ app.use(fileUpload({
     tempFileDir : '/tmp/',
     createParentPath: true
 }));
+app.use('/images', express.static('src/uploads/images'));
+
 
 app.get('/',(req,res)=>{
     res.send('Hello from Backend API')
