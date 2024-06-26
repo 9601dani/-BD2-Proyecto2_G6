@@ -4,16 +4,15 @@ const model = mongose.model;
 
 const ordersSchema = new Schema({
 
-    fecha_pedido: Date,
-    fecha_entrega: Date,
+    fecha_pedido: String,
     estado: String,
     precio_total: Number,
-    id_usuario: {type: Schema.Types.ObjectId, ref: 'Users'},
-    direccion:String,
+    id_usuario: {type: Schema.Types.ObjectId, ref: 'users'},
+    direccion_envio:String,
     libros: [{
-        id_libro: {type: Schema.Types.ObjectId, ref: 'Books'},
-        cantidad: Number,
-        precio: Number
+        id_libro: {type: Schema.Types.ObjectId, ref: 'books'},
+        subtotal: Number,
+        cantidad: Number
     }],
     metodo_pago: String
 
