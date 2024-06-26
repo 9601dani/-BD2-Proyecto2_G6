@@ -14,8 +14,6 @@ const createOrder = async (req, res) => {
 
     const validStock = await validateStock(libros);
 
-    console.log("stock valido", validStock);
-
     //validate stock
     if (validStock.length > 0) {
       return res.status(400).json({
