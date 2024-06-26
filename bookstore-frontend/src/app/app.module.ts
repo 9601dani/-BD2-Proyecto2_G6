@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { SlicePipe } from '@angular/common';
+import { NgbAlert, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,8 @@ import { SlicePipe } from '@angular/common';
     BrowserAnimationsModule,
     MaterialModule,
     SlicePipe,
+    NgbModule,
+    NgbAlert,
   ],
   providers: [],
   bootstrap: [AppComponent],

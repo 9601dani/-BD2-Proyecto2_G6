@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { UserRoutingModule } from './user-routing.module';
 import { ModalEdicionUsuarioComponent } from './pages/modal-edicion-usuario/modal-edicion-usuario.component';
+import { ModalComprasComponent } from './pages/modal-compras/modal-compras.component';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { ModalEdicionUsuarioComponent } from './pages/modal-edicion-usuario/moda
     PedidoPageComponent,
     UsuarioPageComponent,
     ModalEdicionUsuarioComponent,
+    ModalComprasComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +40,7 @@ import { ModalEdicionUsuarioComponent } from './pages/modal-edicion-usuario/moda
     MaterialModule,
     UserRoutingModule,
     SlicePipe,
+    NgbAlert,
   ],
 })
 export class UserModule {}
