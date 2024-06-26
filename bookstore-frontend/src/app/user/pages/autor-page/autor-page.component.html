@@ -1,43 +1,102 @@
-<section class="overflow-hidden text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-wrap mx-auto lg:w-4/5">
-      <img
-        alt="titulo"
-        src="rrr"
-        class="object-cover object-center w-full h-64 rounded lg:w-1/2 lg:h-auto"
-      />
-      <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
-        <h2 class="text-sm tracking-widest text-gray-500 title-font">df</h2>
-        <h1 class="mb-1 text-3xl font-medium text-gray-900 title-font">ff</h1>
-        <div class="flex mb-4">
-          <svg
-            viewBox="0 0 100 100"
-            class="w-10 h-10 text-white p-2 bg-green-500 rounded-full"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="orange"
-              d="
-    M50,0 L58.82,37.86 L97.55,34.55 L64.27,54.64 L78.39,90.45 L50,65 L21.61,90.45 L35.73,54.64 L2.45,34.55 L41.18,37.86 Z
-  "
-            ></path>
-          </svg>
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Nombre</mat-card-title>
+    <mat-card-subtitle>Autor</mat-card-subtitle>
+  </mat-card-header>
 
-          <span class="flex items-center">
-            <span class="ml-3 text-gray-600">reviews</span>
-          </span>
+  <mat-card-content>
+    <div class="container mr-5">
+      <div class="row">
+        <div class="col-md-6">
+          <img
+            class="img-fluid"
+            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            alt="Photo of a Shiba Inu"
+          />
+          <h2>Biografia</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Necessitatibus tempora iste impedit veritatis laudantium eos optio
+            itaque culpa dolorum, iusto fugiat perferendis aperiam vero natus,
+            quis molestiae maiores architecto ipsa?
+          </p>
         </div>
-        <p class="mt-6 mb-5 leading-relaxed">ddsd</p>
+        <div class="col-md-6">
+          <div class="row">
+            <!-- ciclo para los libros-->
+            <mat-accordion>
+              <mat-expansion-panel
+                (opened)="this.panelAbierto = true"
+                (closed)="this.panelAbierto = false"
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title> Libro </mat-panel-title>
+                  <mat-panel-description>
+                    Desglozar para mas informacion
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
 
-        <div class="flex">
-          <span class="text-2xl font-bold text-green-400"> valor </span>
-          <button
-            class="px-2 py-1 ml-auto text-white bg-green-400 rounded hover:bg-green-400"
-          >
-            Add to cart
-          </button>
+                <!-- ciclo para la info en especifico-->
+                <div class="row">
+                  <mat-card class="example-card" appearance="outlined">
+                    <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>Nombre</mat-card-title>
+                      <mat-card-subtitle>Autor</mat-card-subtitle>
+                    </mat-card-header>
+                    <img
+                      mat-card-image
+                      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                      alt="Photo of a Shiba Inu"
+                    />
+                    <mat-card-content>
+                      <div class="container mr-5">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <h2>Biografia</h2>
+                            <p>
+                              Lorem ipsum dolor sit amet consectetur,
+                              adipisicing elit. Necessitatibus tempora iste
+                              impedit veritatis laudantium eos optio itaque
+                              culpa dolorum, iusto fugiat perferendis aperiam
+                              vero natus, quis molestiae maiores architecto
+                              ipsa?
+                            </p>
+
+                            <div class="row">
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">genero de publicacion</th>
+                                    <th scope="col">genero de publicacion</th>
+                                    <th scope="col">genero de publicacion</th>
+                                    <th scope="col">genero de publicacion</th>
+                                    <th scope="col">genero de publicacion</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>genero</td>
+                                    <td>genero</td>
+                                    <td>genero</td>
+                                    <td>genero</td>
+                                    <td>genero</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card-content></mat-card
+                  >
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </mat-card-content></mat-card
+>
