@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material/material.module';
+import { SlicePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { MaterialModule } from './material/material.module';
     HttpClientModule,
     SharedModule,
     MaterialModule,
+    SlicePipe,
   ],
   providers: [],
   bootstrap: [AppComponent],

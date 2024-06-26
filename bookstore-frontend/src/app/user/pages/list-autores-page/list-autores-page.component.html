@@ -5,6 +5,25 @@
       <div class="titulo justify-content-center text-center">
         <h1>Listado de Autores</h1>
       </div>
+      <!--para la busqeuda-->
+      <div class="row">
+        <div class="col-md-10">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Busca un Autor</mat-label>
+            <input matInput type="text" placeholder="Autor" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <button
+            mat-raised-button
+            color="primary"
+            style="width: 90%"
+            class="w-full"
+          >
+            Buscar Autor
+          </button>
+        </div>
+      </div>
       <!-- para que vaya adentro-->
       <div class="row">
         <!--generacion de cards-->
@@ -20,6 +39,8 @@
               alt="Photo of a Shiba Inu"
             />
             <mat-card-content>
+              <hr />
+
               <div>
                 <p class="truncate hover:whitespace-normal">descripcion</p>
                 <p>{{ valores.valor }}</p>
@@ -32,7 +53,7 @@
                   <button
                     mat-raised-button
                     color="warn"
-                    style="width: 60%; margin-right: 5px; height: 95%"
+                    style="width: 80%"
                     routerLink="/user/autor/{{ valores.id }}"
                   >
                     Ver Autor

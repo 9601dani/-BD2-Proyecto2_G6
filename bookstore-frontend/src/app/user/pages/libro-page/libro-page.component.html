@@ -1,1 +1,144 @@
-<p>libro-page works!</p>
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Nombre</mat-card-title>
+    <mat-card-subtitle>Autor</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="container mr-5">
+      <div class="row">
+        <div class="col-md-6">
+          <img
+            class="img-fluid"
+            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            alt="Photo of a Shiba Inu"
+          />
+          <hr />
+          <h2>Informacion</h2>
+          <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Autor</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Disponibilidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>genero</td>
+                <td>genero</td>
+                <td>genero</td>
+                <td>genero</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!--aca la calificacion general-->
+          <div class="flex mb-4">
+            <ng-container *ngFor="let item of [1, 2, 3, 4, 5]">
+              <svg
+                viewBox="0 0 100 100"
+                class="star-icon"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill="orange"
+                  d="
+          M50,0 L58.82,37.86 L97.55,34.55 L64.27,54.64 L78.39,90.45
+          L50,65 L21.61,90.45 L35.73,54.64 L2.45,34.55 L41.18,37.86 Z
+        "
+                ></path>
+              </svg>
+            </ng-container>
+
+            <span class="flex items-center">
+              <span class="ml-3 text-gray-600">4 reviews</span>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <h2>Resenias</h2>
+
+            <!-- ciclo para los libros-->
+            <div
+              class="elementoRepetir"
+              *ngFor="let valores of [1, 2, 3, 4, 5]"
+            >
+              <mat-accordion>
+                <mat-expansion-panel
+                  (opened)="this.panelAbierto = true"
+                  (closed)="this.panelAbierto = false"
+                >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> Comentario x </mat-panel-title>
+                    <mat-panel-description>
+                      Desglozar para mas informacion
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <!-- ciclo para la info en especifico-->
+                  <div class="row">
+                    <mat-card class="example-card" appearance="outlined">
+                      <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>Nombre completo</mat-card-title>
+                        <mat-card-subtitle>Fecha</mat-card-subtitle>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-8">
+                              <h2>Resenia</h2>
+                            </div>
+                            <div class="col-md-4">
+                              <!--aca la calificacion especifica-->
+                              <div class="flex mb-4">
+                                <ng-container
+                                  *ngFor="let item of [1, 2, 3, 4, 5]"
+                                >
+                                  <svg
+                                    viewBox="0 0 100 100"
+                                    class="star-icon"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill="orange"
+                                      d="
+          M50,0 L58.82,37.86 L97.55,34.55 L64.27,54.64 L78.39,90.45
+          L50,65 L21.61,90.45 L35.73,54.64 L2.45,34.55 L41.18,37.86 Z
+        "
+                                    ></path>
+                                  </svg>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <p>
+                                Lorem ipsum dolor sit amet consectetur,
+                                adipisicing elit. Necessitatibus tempora iste
+                                impedit veritatis laudantium eos optio itaque
+                                culpa dolorum, iusto fugiat perferendis aperiam
+                                vero natus, quis molestiae maiores architecto
+                                ipsa?
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-card-content></mat-card
+                    >
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content></mat-card
+>
