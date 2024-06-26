@@ -10,9 +10,7 @@
 
     <ng-container>
       <div class="w-full mx-auto overflow-auto lg:w-2/3">
-        <div class="flex justify-end p-2">
-          <button mat-raised-button color="warn">Limpiar</button>
-        </div>
+        <hr />
         <section class="text-gray-600 body-font">
           <div class="container px-5 py-24 mx-auto">
             <div class="flex flex-col w-full mb-20 text-center">
@@ -25,60 +23,97 @@
 
             <div class="w-full mx-auto overflow-auto lg:w-2/3">
               <table
-                class="w-full text-left whitespace-no-wrap table-striped table-dark"
+                mat-table
+                [dataSource]="productos"
+                class="mat-elevation-z8"
               >
-                <thead>
-                  <tr>
-                    <th
-                      class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 rounded-tl rounded-bl title-font"
+                <!-- Nombre Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef class="px-4 py-3">
+                    Nombre
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="px-4 py-3">
+                    {{ element.nombre }}
+                  </td>
+                </ng-container>
+
+                <!-- Cantidad Column -->
+                <ng-container matColumnDef="cantidad">
+                  <th mat-header-cell *matHeaderCellDef class="px-4 py-3">
+                    Cantidad
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="px-4 py-3">
+                    {{ element.cantidad }}
+                  </td>
+                </ng-container>
+
+                <!-- Precio Column -->
+                <ng-container matColumnDef="precio">
+                  <th mat-header-cell *matHeaderCellDef class="px-4 py-3">
+                    Precio
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="px-4 py-3">
+                    {{ element.precio | currency : "GTQ" : "symbol" : "1.2-2" }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="accion">
+                  <th mat-header-cell *matHeaderCellDef class="px-4 py-3">
+                    Accion
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="px-4 py-3">
+                    <button
+                      mat-raised-button
+                      color="accent"
+                      (click)="this.eliminarId(element.id)"
                     >
-                      Nombre
-                    </th>
-                    <th
-                      class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 title-font"
-                    >
-                      Cantidad
-                    </th>
-                    <th
-                      class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 title-font"
-                    >
-                      Precio
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let producto of this.productos">
-                    <td class="px-4 py-3">{{ producto.nombre }}</td>
-                    <td class="px-4 py-3">{{ producto.cantidad }}</td>
-                    <td class="px-4 py-3">
-                      {{ producto.precio | currency : "Q" }}
-                    </td>
-                  </tr>
-                </tbody>
+                      Eliminar
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
               </table>
+
+              <div class="total mt-4">
+                <h2>
+                  Total: {{ sumaTotal | currency : "GTQ" : "symbol" : "1.2-2" }}
+                </h2>
+              </div>
             </div>
           </div>
         </section>
-
-        <div class="flex w-full pl-4 mx-auto mt-4 lg:w-2/3">
-          <button mat-raised-button color="primary" class="ml-auto">
-            Pagar
-          </button>
-        </div>
-
         <hr class="border-gray-900 border-t-1" />
-      </div>
-    </ng-container>
 
-    <!-- Mensaje si el carrito está vacío -->
-    <ng-container>
-      <div class="flex flex-col w-full mb-20 text-center">
-        <h3
-          class="my-2 text-3xl font-medium text-gray-900 sm:text-4xl title-font"
-        >
-          El carrito de compras está vacío
-        </h3>
+        <div class="row justify-content-center mt-4">
+          <div class="col-md-6 lg:w-2/3 mt-2">
+            <button
+              mat-raised-button
+              color="warn"
+              class="w-full"
+              (click)="this.eliminarCarrito()"
+            >
+              Limpiar
+            </button>
+          </div>
+          <div class="col-md-6 lg:w-2/3 mt-2">
+            <button mat-raised-button color="primary" class="w-full">
+              Pagar
+            </button>
+          </div>
+        </div>
       </div>
     </ng-container>
+  </div>
+  <hr class="border-gray-900 border-t-1" />
+
+  <div class="porSiElimina" *ngIf="this.eliminado">
+    <ngb-alert [dismissible]="false">
+      <strong>Advertencia</strong> Todo el carrito se ha eliminado
+    </ngb-alert>
   </div>
 </section>
