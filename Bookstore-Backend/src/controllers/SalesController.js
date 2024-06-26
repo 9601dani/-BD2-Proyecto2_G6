@@ -53,7 +53,7 @@ const createOrder = async (req, res) => {
   } catch (error) {
     res
       .status(400)
-      .json({ msj: "Error al crear el pedido", error: error.message });
+      .json({ok:false, msj: "Error al crear el pedido", error: error.message });
   }
 };
 
@@ -115,7 +115,7 @@ const getOrders = async (req, res) => {
     const orders = await Order.find();
     res.status(200).json(orders);
   } catch (error) {
-    res.status(400).json({ msj: "Error getting orders", error: error.message });
+    res.status(400).json({ok:false, msj: "Error getting orders", error: error.message });
   }
 };
 
@@ -125,24 +125,33 @@ const getOrderById = async (req, res) => {
 
     res.status(200).json(order);
   } catch (error) {
-    res.status(400).json({ msj: "Error getting order", error: error.message });
+    res.status(400).json({ok:false, msj: "Error getting order", error: error.message });
   }
 };
-
-
-
-
 
 
 
 const updateOrderById = async (req, res) => {
-  try {
-    await Orders.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json({ msj: "Order updated successfully" });
-  } catch (error) {
-    res.status(400).json({ msj: "Error updating order", error: error.message });
-  }
+    try {
+        const updatedOrder = await Order.findByIdAndUpdate(
+            req.params.id_pedido,
+            { estado: req.body.estado },
+            { new: true }
+        );
+
+        if (!updatedOrder) {
+            return res.status(404).json({ok:false, msj: 'Pedido no encontrado' });
+        }
+
+        res.status(200).json({ ok: true, msj: 'Pedido actualizado correctamente' });
+    } catch (error) {
+        res.status(500).json({ ok: false, msj: 'Error al actualizar el estado del pedido' });
+    }
+
 };
+
+
+
 
 const getOrdersByUser = async (req, res) => {
   try {
@@ -152,6 +161,9 @@ const getOrdersByUser = async (req, res) => {
     res.status(400).json({ msj: "Error getting orders", error: error.message });
   }
 };
+
+
+
 
 async function updateSalesCustomer(customer) {
   try {
