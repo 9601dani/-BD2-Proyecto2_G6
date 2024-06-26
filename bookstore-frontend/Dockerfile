@@ -12,8 +12,10 @@ RUN npm run build
 # Use official nginx image as the base image
 FROM nginx:alpine
 # Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist/bookstore-frontend /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/bookstore /usr/share/nginx/html
 COPY --from=build /usr/local/app/nginx.conf /etc/nginx/conf.d/default.conf
 
 
-EXPOSE 4200
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
