@@ -1,1 +1,84 @@
-<p>cart-page works!</p>
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col w-full mb-20 text-center">
+      <h1
+        class="mb-2 text-3xl font-medium text-gray-900 sm:text-4xl title-font"
+      >
+        Carrito de compras
+      </h1>
+    </div>
+
+    <ng-container>
+      <div class="w-full mx-auto overflow-auto lg:w-2/3">
+        <div class="flex justify-end p-2">
+          <button mat-raised-button color="warn">Limpiar</button>
+        </div>
+        <section class="text-gray-600 body-font">
+          <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col w-full mb-20 text-center">
+              <h1
+                class="mb-2 text-3xl font-medium text-gray-900 sm:text-4xl title-font"
+              >
+                Lista de Productos
+              </h1>
+            </div>
+
+            <div class="w-full mx-auto overflow-auto lg:w-2/3">
+              <table
+                class="w-full text-left whitespace-no-wrap table-striped table-dark"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 rounded-tl rounded-bl title-font"
+                    >
+                      Nombre
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 title-font"
+                    >
+                      Cantidad
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 title-font"
+                    >
+                      Precio
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let producto of this.productos">
+                    <td class="px-4 py-3">{{ producto.nombre }}</td>
+                    <td class="px-4 py-3">{{ producto.cantidad }}</td>
+                    <td class="px-4 py-3">
+                      {{ producto.precio | currency : "Q" }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <div class="flex w-full pl-4 mx-auto mt-4 lg:w-2/3">
+          <button mat-raised-button color="primary" class="ml-auto">
+            Pagar
+          </button>
+        </div>
+
+        <hr class="border-gray-900 border-t-1" />
+      </div>
+    </ng-container>
+
+    <!-- Mensaje si el carrito está vacío -->
+    <ng-container>
+      <div class="flex flex-col w-full mb-20 text-center">
+        <h3
+          class="my-2 text-3xl font-medium text-gray-900 sm:text-4xl title-font"
+        >
+          El carrito de compras está vacío
+        </h3>
+      </div>
+    </ng-container>
+  </div>
+</section>
