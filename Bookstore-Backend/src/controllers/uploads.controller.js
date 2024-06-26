@@ -1,10 +1,22 @@
-const { uploadFile } = require('../helpers/uploadFile');
+const { uploadFile, updateFile } = require('../helpers/uploadFile');
 const path  = require('path');
 
 
 const addImage = async (req, res) => {
     try {
         const fileName = await uploadFile(req.files
+            , ['png', 'jpg', 'jpeg', 'gif']
+            , 'images');
+        res.json({fileName});
+    } catch(error) {
+        res.status(400).json({ error });
+    }
+}
+
+const updateImage = async (req, res) => {
+    try {
+        const { image } = req.params;
+        const fileName = await updateFile(req.files, image
             , ['png', 'jpg', 'jpeg', 'gif']
             , 'images');
         res.json({fileName});
@@ -22,5 +34,6 @@ const getImage = (req, res) => {
 
 module.exports = {
     addImage,
-    getImage
+    getImage,
+    updateImage
 }

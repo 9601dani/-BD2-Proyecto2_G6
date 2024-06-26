@@ -13,8 +13,7 @@ const authorSchema = new schema({
         required: [true, 'Name is required']
     },
     photo: {
-        type: String,
-        required: [true, 'Photo is required']
+        type: String
     },
     biography: {
         type: String,

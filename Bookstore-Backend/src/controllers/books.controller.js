@@ -35,11 +35,17 @@ const getPuntuacionById = async (req, res) => {
     res.json(book.puntuacion_primedio);
 };
 
+const getBooksByAuthorId = async (req, res) => {
+    const books = await Book.find({ autor: req.params.id });
+    res.json(books);
+}
+
 module.exports = {
     getAll,
     getBookById,
     addBook,
     deleteBook,
     updateBook,
-    getPuntuacionById
+    getPuntuacionById,
+    getBooksByAuthorId
 }
