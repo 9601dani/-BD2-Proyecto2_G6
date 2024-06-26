@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, SlicePipe } from '@angular/common';
 import { ListAutoresPageComponent } from './pages/list-autores-page/list-autores-page.component';
 import { AutorPageComponent } from './pages/autor-page/autor-page.component';
 import { ListLibrosPageComponent } from './pages/list-libros-page/list-libros-page.component';
@@ -16,8 +16,6 @@ import { MaterialModule } from '../material/material.module';
 import { UserRoutingModule } from './user-routing.module';
 import { ModalEdicionUsuarioComponent } from './pages/modal-edicion-usuario/modal-edicion-usuario.component';
 
-
-
 @NgModule({
   declarations: [
     ListAutoresPageComponent,
@@ -31,13 +29,14 @@ import { ModalEdicionUsuarioComponent } from './pages/modal-edicion-usuario/moda
     ShoppingPageComponent,
     PedidoPageComponent,
     UsuarioPageComponent,
-    ModalEdicionUsuarioComponent
+    ModalEdicionUsuarioComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    UserRoutingModule
-  ]
+    UserRoutingModule,
+    SlicePipe,
+  ],
 })
-export class UserModule { }
+export class UserModule {}

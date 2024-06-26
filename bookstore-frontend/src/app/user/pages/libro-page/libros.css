@@ -1,0 +1,5 @@
+  .star-icon {
+    width: 50px; /* Ancho deseado */
+    height: 50px; /* Alto deseado */
+    fill: orange; /* Color de relleno de la estrella */
+  }
