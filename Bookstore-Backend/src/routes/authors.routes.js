@@ -1,13 +1,14 @@
 const express = require('express');
-const AuthorController = require('../controllers/authors.controller');
+const AuthorsController = require('../controllers/authors.controller');
 
 const router = express.Router();
 const api = '/api/v1/authors';
 
-router.post(`${api}/add`, AuthorController.addAuthor);
-router.get(`${api}/all`, AuthorController.getAll);
-router.get(`${api}/active`, AuthorController.getAuthorsActive);
-router.get(`${api}/find/:id`, AuthorController.getAuthorById);
-router.delete(`${api}/:id`, AuthorController.deleteAuthor);
+router.post(`${api}/add`, AuthorsController.addAuthor);
+router.get(`${api}/all`, AuthorsController.getAll);
+router.get(`${api}/active`, AuthorsController.getAuthorsActive);
+router.get(`${api}/find/:id`, AuthorsController.getAuthorById);
+router.delete(`${api}/delete/:id`, AuthorsController.deleteAuthor);
+router.put(`${api}/update/:id`, AuthorsController.updateAuthor);
 
 module.exports = router;
