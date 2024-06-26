@@ -1,5 +1,6 @@
 const Order = require("../models/Orders");
 const Books = require("../models/Books");
+const Users = require("../models/Users");
 
 const createOrder = async (req, res) => {
   try {
@@ -14,8 +15,7 @@ const createOrder = async (req, res) => {
 
     const validStock = await validateStock(libros);
 
-    //validate stock
-    if (validStock.length > 0) {
+    if (validStock.length > 0 || false) {
       return res.status(400).json({
         ok: false,
         msj: "Sin stock suficiente de los siguientes libros",
@@ -23,14 +23,11 @@ const createOrder = async (req, res) => {
       });
     }
 
-    //create order
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleDateString("es-ES");
 
-    //calculate total price
     const total_price = await calculateTotalPrice(libros);
 
-    //update Stock
     if (!(await updateStock(libros))) {
       return res
         .status(500)
@@ -50,8 +47,9 @@ const createOrder = async (req, res) => {
     res.status(200).json({ ok: true, msj: "Pedido realizado exitosamente" });
   } catch (error) {
     res
-      .status(400)
-      .json({ok:false, msj: "Error al crear el pedido", error: error.message });
+      .status(500)
+      .json({
+      ok: false, msj: "Error al crear el pedido",error: error.message});
   }
 };
 
@@ -103,7 +101,6 @@ async function updateStock(books) {
 
     return true;
   } catch (error) {
-    console.error("Error al actualizar el stock:", error);
     return false;
   }
 }
@@ -113,7 +110,13 @@ const getOrders = async (req, res) => {
     const orders = await Order.find();
     res.status(200).json(orders);
   } catch (error) {
-    res.status(400).json({ok:false, msj: "Error getting orders", error: error.message });
+    res
+      .status(500)
+      .json({
+        ok: false,
+        msj: "Error al obtener los pedidos",
+        error: error.message,
+      });
   }
 };
 
@@ -121,107 +124,94 @@ const getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id_pedido);
 
+    if (!order) {
+      res
+        .status(404)
+        .json({ ok: false, msj: "Pedido no encontrado" });
+    }
+
     res.status(200).json(order);
   } catch (error) {
-    res.status(400).json({ok:false, msj: "Error getting order", error: error.message });
+    res
+      .status(400)
+      .json({ 
+        ok: false,
+        msj: "Error al obtener el id del pedido", 
+        error: error.message });
   }
 };
 
-
-
 const updateOrderById = async (req, res) => {
-    try {
-        const updatedOrder = await Order.findByIdAndUpdate(
-            req.params.id_pedido,
-            { estado: req.body.estado },
-            { new: true }
-        );
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id_pedido,
+      { estado: req.body.estado },
+      { new: true }
+    );
 
-        if (!updatedOrder) {
-            return res.status(404).json({ok:false, msj: 'Pedido no encontrado' });
-        }
-
-        res.status(200).json({ ok: true, msj: 'Pedido actualizado correctamente' });
-    } catch (error) {
-        res.status(500).json({ ok: false, msj: 'Error al actualizar el estado del pedido' });
+    if (!updatedOrder) {
+      res
+        .status(404)
+        .json({ 
+          ok: false,
+          msj: "Pedido no encontrado" });
     }
 
+    res.status(200).json({ ok: true, msj: "Pedido actualizado correctamente" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ 
+        ok: false, 
+        msj: "Error al actualizar el estado del pedido" });
+  }
 };
-
-
-
 
 const getOrdersByUser = async (req, res) => {
   try {
-    const orders = await Orders.find({ id_usuario: req.params.id });
+    const user = await Users.findById(req.params.id_usuario);
+
+    if (!user) {
+      res
+        .status(404)
+        .json({ ok: false, msj: "Usuario no encontrado" });
+    }
+
+    const orders = await Order.find({ id_usuario: req.params.id_usuario });
+
     res.status(200).json(orders);
   } catch (error) {
-    res.status(400).json({ msj: "Error getting orders", error: error.message });
+    res
+      .status(500)
+      .json({
+        ok: false,
+        msj: "Error al obtener los pedidos del usuario",
+        error: error.message
+      });
   }
 };
 
-
-
-
-async function updateSalesCustomer(customer) {
+const getOrdersByStatus = async(req, res)=>{
   try {
+    
+    const orders = await Order.find({estado: req.params.estado});
+
+    res
+      .status(200)
+      .json({
+        orders
+      })
+
   } catch (error) {
-    console.log(error);
+    res
+      .status(500)
+      .json({
+        ok: false,
+        msj: "Error al obtener los pedidos según el estado",
+        error: error.message
+      });
   }
 }
-
-const getOrdersByDate = async (req, res) => {
-  try {
-    res.status(200).json(orders);
-  } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Error getting orders", error: error.message });
-  }
-};
-
-const getMostSoldBooks = async (req, res) => {
-  try {
-    res.status(200).json(books);
-  } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Error getting most sold books", error: error.message });
-  }
-};
-
-const getMostSoldAuthors = async (req, res) => {
-  try {
-    res.status(200).json(authors);
-  } catch (error) {
-    res.status(400).json({
-      message: "Error getting most sold authors",
-      error: error.message,
-    });
-  }
-};
-
-const getMostSoldCategories = async (req, res) => {
-  try {
-    res.status(200).json(categories);
-  } catch (error) {
-    res.status(400).json({
-      message: "Error getting most sold categories",
-      error: error.message,
-    });
-  }
-};
-
-const getMostSoldCustomers = async (req, res) => {
-  try {
-    res.status(200).json(customers);
-  } catch (error) {
-    res.status(400).json({
-      message: "Error getting most sold customers",
-      error: error.message,
-    });
-  }
-};
 
 module.exports = {
   createOrder,
@@ -229,9 +219,5 @@ module.exports = {
   getOrderById,
   updateOrderById,
   getOrdersByUser,
-  getOrdersByDate,
-  getMostSoldBooks,
-  getMostSoldAuthors,
-  getMostSoldCategories,
-  getMostSoldCustomers,
+  getOrdersByStatus
 };
