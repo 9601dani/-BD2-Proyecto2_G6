@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 const model = mongoose.model;
 
 const userSchema = new Schema({
-    _id : ObjectId,
+    _id : String,
     username : String,
     password : String,
     complete_name : String,
@@ -13,7 +13,7 @@ const userSchema = new Schema({
     register_date : Date,
     rol : String,
     photo : String,
-    payment_method : String,
+    payment_method : String
 },
 {
     versionKey : false
