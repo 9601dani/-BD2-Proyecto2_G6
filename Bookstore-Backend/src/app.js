@@ -3,10 +3,10 @@ const app = express();
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 //Routes
-const ordersRoutes = require('./routes/Orders.routes');
-
+const ordersRoutes = require('./routes/orders.routes');
 const authorsRoutes = require('./routes/authors.routes');
 const uploadRoutes = require('./routes/upload.routes');
+const usersRoutes = require('./routes/users.routes');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,7 +22,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use(ordersRoutes);
-
+app.use(usersRoutes);
 app.use(authorsRoutes);
 app.use(uploadRoutes);
 
