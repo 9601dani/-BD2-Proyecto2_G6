@@ -1,1 +1,62 @@
-<p>mis-compras-page works!</p>
+<div class="container1">
+  <div class="row">
+    <h1>Tabla de Pedidos</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Columna 1</th>
+          <th>Columna 2</th>
+          <th>Columna 3</th>
+          <th>Columna 4</th>
+          <th>Columna 5</th>
+          <th>Columna 6</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--aca hace el ciclo-->
+        <tr *ngFor="let sueldo of pagedItems">
+          <td>sd</td>
+          <td>sd</td>
+          <td>sd</td>
+          <td>sd</td>
+          <td>sd</td>
+          <td>
+            <mat-card class="example-card" appearance="outlined">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Shiba Inu</mat-card-title>
+                <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+              </mat-card-header>
+              <img
+                mat-card-image
+                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu"
+              />
+              <mat-card-content>
+                <p>
+                  The Shiba Inu is the smallest of the six original and distinct
+                  spitz breeds of dog from Japan. A small, agile dog that copes
+                  very well with mountainous terrain, the Shiba Inu was
+                  originally bred for hunting.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+              </mat-card-actions>
+            </mat-card>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <mat-paginator
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</div>
