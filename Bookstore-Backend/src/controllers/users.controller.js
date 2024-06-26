@@ -1,5 +1,34 @@
 const User = require('../models/Users');
 
+const login = async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        res.status(400).json({ message: 'El email y la contraseña son requeridos', 'ok': false});
+        return;
+    }
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            res.status(404).json({ message: 'No existe el usuario', 'ok': false});
+            return;
+        }
+
+        if (user.password !== password) {
+            res.status(401).json({ message: 'Contraseña incorrecta', 'ok': false});
+            return;
+        }
+
+        res.status(200).json({ user, 'ok': true });
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error en el servidor', error: error.message, 'ok': false});
+    }
+
+}
+
+
+
 const getAllUsers = async (req, res) => {
     const users = await User.find();
     if (users==null || users.length==0 || !users) {
