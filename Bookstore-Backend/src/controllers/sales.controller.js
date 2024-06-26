@@ -9,7 +9,7 @@ const createOrder = async (req, res) => {
     if (!id_usuario || !libros) {
       return res.status(400).json({
         ok: false,
-        msj: "Campos incompletos, debe enviar id_usuario y arreglo de libros",
+        message: "Campos incompletos, debe enviar id_usuario y arreglo de libros",
       });
     }
 
@@ -18,7 +18,7 @@ const createOrder = async (req, res) => {
     if (validStock.length > 0 || false) {
       return res.status(400).json({
         ok: false,
-        msj: "Sin stock suficiente de los siguientes libros",
+        message: "Sin stock suficiente de los siguientes libros",
         books: validStock,
       });
     }
@@ -31,7 +31,7 @@ const createOrder = async (req, res) => {
     if (!(await updateStock(libros))) {
       return res
         .status(500)
-        .json({ ok: false, msj: "Error al actualizar stock" });
+        .json({ ok: false, message: "Error al actualizar stock" });
     }
 
     await new Order({
@@ -44,12 +44,12 @@ const createOrder = async (req, res) => {
       metodo_pago: "Efectivo",
     }).save();
 
-    res.status(200).json({ ok: true, msj: "Pedido realizado exitosamente" });
+    res.status(200).json({ ok: true, message: "Pedido realizado exitosamente" });
   } catch (error) {
     res
       .status(500)
       .json({
-      ok: false, msj: "Error al crear el pedido",error: error.message});
+      ok: false, message: "Error al crear el pedido",error: error.message});
   }
 };
 
@@ -114,7 +114,7 @@ const getOrders = async (req, res) => {
       .status(500)
       .json({
         ok: false,
-        msj: "Error al obtener los pedidos",
+        message: "Error al obtener los pedidos",
         error: error.message,
       });
   }
@@ -127,7 +127,7 @@ const getOrderById = async (req, res) => {
     if (!order) {
       res
         .status(404)
-        .json({ ok: false, msj: "Pedido no encontrado" });
+        .json({ ok: false, message: "Pedido no encontrado" });
     }
 
     res.status(200).json(order);
@@ -136,7 +136,7 @@ const getOrderById = async (req, res) => {
       .status(400)
       .json({ 
         ok: false,
-        msj: "Error al obtener el id del pedido", 
+        message: "Error al obtener el id del pedido", 
         error: error.message });
   }
 };
@@ -154,16 +154,16 @@ const updateOrderById = async (req, res) => {
         .status(404)
         .json({ 
           ok: false,
-          msj: "Pedido no encontrado" });
+          message: "Pedido no encontrado" });
     }
 
-    res.status(200).json({ ok: true, msj: "Pedido actualizado correctamente" });
+    res.status(200).json({ ok: true, message: "Pedido actualizado correctamente" });
   } catch (error) {
     res
       .status(500)
       .json({ 
         ok: false, 
-        msj: "Error al actualizar el estado del pedido" });
+        message: "Error al actualizar el estado del pedido" });
   }
 };
 
@@ -174,7 +174,7 @@ const getOrdersByUser = async (req, res) => {
     if (!user) {
       res
         .status(404)
-        .json({ ok: false, msj: "Usuario no encontrado" });
+        .json({ ok: false, message: "Usuario no encontrado" });
     }
 
     const orders = await Order.find({ id_usuario: req.params.id_usuario });
@@ -185,7 +185,7 @@ const getOrdersByUser = async (req, res) => {
       .status(500)
       .json({
         ok: false,
-        msj: "Error al obtener los pedidos del usuario",
+        message: "Error al obtener los pedidos del usuario",
         error: error.message
       });
   }
@@ -207,7 +207,7 @@ const getOrdersByStatus = async(req, res)=>{
       .status(500)
       .json({
         ok: false,
-        msj: "Error al obtener los pedidos según el estado",
+        message: "Error al obtener los pedidos según el estado",
         error: error.message
       });
   }
