@@ -1,0 +1,31 @@
+  .container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Ajuste de altura para centrar en la página */
+  }
+
+  .example-card {
+    width: 80%; /* Ancho del card ajustado */
+    max-width: 800px; /* Máximo ancho */
+    margin-top: 20px; /* Espacio superior */
+  }
+
+  .table {
+    width: 100%; /* Ancho completo */
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Espaciado entre filas */
+  }
+
+  .table th,
+  .table td {
+    padding: 10px; /* Espaciado interno de las celdas */
+  }
+
+  .mt-5 {
+    margin-top: 20px; /* Espacio superior para la etiqueta */
+  }
+
+  hr {
+    margin: 20px 0; /* Espacio alrededor de la línea horizontal */
+  }

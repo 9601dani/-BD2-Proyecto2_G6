@@ -1,1 +1,52 @@
-<p>usuario-page works!</p>
+<!-- aca debera de ir una vista general del usuario-->
+<div class="container">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Vista General de Usuario</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="text-center">
+      <div class="row">
+        <div class="col-md-12">
+          <label for="nombre" class="mt-5">
+            Informacion General del Usuario
+          </label>
+        </div>
+      </div>
+      <hr />
+      <div class="row justify-content-center">
+        <table class="table table-striped" style="margin-bottom: 20px">
+          <thead>
+            <tr>
+              <th scope="col">Nombre de Usuario</th>
+              <th scope="col">Apellido de Usuario</th>
+              <th scope="col">Correo Electrónico</th>
+              <th scope="col">Teléfono</th>
+              <th scope="col">Dirección</th>
+              <th scope="col">Fecha de registro</th>
+              <th scope="col">Rol de Usuario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>aa</td>
+              <td>dd</td>
+              <td>aa</td>
+              <td>dd</td>
+              <td>aa</td>
+              <td>dd</td>
+              <td>dd</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-6">
+          <button mat-fab extended (click)="this.editarInformacion()">
+            Editar Informacion
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

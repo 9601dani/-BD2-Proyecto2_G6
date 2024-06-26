@@ -14,6 +14,7 @@ import { UsuarioPageComponent } from './pages/usuario-page/usuario-page.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { UserRoutingModule } from './user-routing.module';
+import { ModalEdicionUsuarioComponent } from './pages/modal-edicion-usuario/modal-edicion-usuario.component';
 
 
 
@@ -29,7 +30,8 @@ import { UserRoutingModule } from './user-routing.module';
     LayoutPageComponent,
     ShoppingPageComponent,
     PedidoPageComponent,
-    UsuarioPageComponent
+    UsuarioPageComponent,
+    ModalEdicionUsuarioComponent
   ],
   imports: [
     CommonModule,
