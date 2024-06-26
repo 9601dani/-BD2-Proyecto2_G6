@@ -87,5 +87,6 @@ module.exports = {
     updateUser,
     changeStatus,
     topBooks,
-    getOrders
+    getOrders,
+    login
 };
