@@ -13,6 +13,13 @@ import { PedidoPageComponent } from './pages/pedido-page/pedido-page.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BookCardComponent } from './components/book-card/book-card.component';
+import { AutorCardComponent } from './components/autor-card/autor-card.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { PedidoCardComponent } from './components/pedido-card/pedido-card.component';
+import { StartsCardComponent } from './components/starts-card/starts-card.component';
+import { ReviewCardComponent } from './components/review-card/review-card.component';
+import { AutorImagenPipe } from './pipes/autor-imagen.pipe';
 
 
 
@@ -27,7 +34,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     TopLibrosPageComponent,
     AutorPageComponent,
     LibroPageComponent,
-    PedidoPageComponent
+    PedidoPageComponent,
+    BookCardComponent,
+    AutorCardComponent,
+    ConfirmDialogComponent,
+    PedidoCardComponent,
+    StartsCardComponent,
+    ReviewCardComponent,
+    AutorImagenPipe
   ],
   imports: [
     CommonModule,
