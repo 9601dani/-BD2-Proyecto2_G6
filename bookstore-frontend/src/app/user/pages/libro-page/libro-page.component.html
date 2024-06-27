@@ -1,8 +1,12 @@
 <mat-card class="example-card" appearance="outlined">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Nombre</mat-card-title>
-    <mat-card-subtitle>Autor</mat-card-subtitle>
+    <mat-card-title>{{ this.libro.titulo }}</mat-card-title>
+    <mat-card-subtitle
+      >{{ this.libro.autor }} -{{
+        this.libro.fecha_publicacion
+      }}</mat-card-subtitle
+    >
   </mat-card-header>
 
   <mat-card-content>
@@ -11,8 +15,10 @@
         <div class="col-md-6">
           <img
             class="img-fluid"
-            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            src="{{ this.libro.imagen_url }}"
             alt="Photo of a Shiba Inu"
+            height="80%"
+            width="80%"
           />
           <hr />
           <h2>Informacion</h2>
@@ -23,21 +29,28 @@
                 <th scope="col">Descripción</th>
                 <th scope="col">Genero</th>
                 <th scope="col">Disponibilidad</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">precio</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>genero</td>
-                <td>genero</td>
-                <td>genero</td>
-                <td>genero</td>
+                <td>{{ this.libro.autor }}</td>
+                <td>{{ this.libro.descripcion }}</td>
+                <td>{{ this.libro.genero }}</td>
+                <td *ngIf="this.libro.disponibilidad; else otroBloque">
+                  Hay existencias
+                </td>
+                <ng-template #otroBloque>No hay existencias</ng-template>
+                <td>{{ this.libro.cantidad_stock }}</td>
+                <td>{{ this.libro.precio }}</td>
               </tr>
             </tbody>
           </table>
 
           <!--aca la calificacion general-->
           <div class="flex mb-4">
-            <ng-container *ngFor="let item of [1, 2, 3, 4, 5]">
+            <ng-container *ngFor="let item of this.ArrayPuntuacion">
               <svg
                 viewBox="0 0 100 100"
                 class="star-icon"
@@ -54,7 +67,9 @@
             </ng-container>
 
             <span class="flex items-center">
-              <span class="ml-3 text-gray-600">4 reviews</span>
+              <span class="ml-3 text-gray-600"
+                >{{ this.libro.puntuacion_promedio }} reviews</span
+              >
             </span>
           </div>
         </div>
@@ -65,7 +80,7 @@
             <!-- ciclo para los libros-->
             <div
               class="elementoRepetir"
-              *ngFor="let valores of [1, 2, 3, 4, 5]"
+              *ngFor="let valores of this.puntuaciones; let i = index"
             >
               <mat-accordion>
                 <mat-expansion-panel
@@ -73,7 +88,9 @@
                   (closed)="this.panelAbierto = false"
                 >
                   <mat-expansion-panel-header>
-                    <mat-panel-title> Comentario x </mat-panel-title>
+                    <mat-panel-title>
+                      Comentario de {{ valores.id_user }}
+                    </mat-panel-title>
                     <mat-panel-description>
                       Desglozar para mas informacion
                     </mat-panel-description>
@@ -84,8 +101,7 @@
                     <mat-card class="example-card" appearance="outlined">
                       <mat-card-header>
                         <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Nombre completo</mat-card-title>
-                        <mat-card-subtitle>Fecha</mat-card-subtitle>
+                        <mat-card-title>Descripción</mat-card-title>
                       </mat-card-header>
                       <mat-card-content>
                         <div class="container">
@@ -95,9 +111,20 @@
                             </div>
                             <div class="col-md-4">
                               <!--aca la calificacion especifica-->
+                              <ng-container
+                                *ngIf="valores.rating !== undefined"
+                              >
+                                {{ verEstrellasEspecificas(valores.rating, i) }}
+                              </ng-container>
+
+                              <!-- Ciclo para mostrar las estrellas dinámicamente -->
                               <div class="flex mb-4">
                                 <ng-container
-                                  *ngFor="let item of [1, 2, 3, 4, 5]"
+                                  *ngFor="
+                                    let index of ArregloEspecificoPuntuaciones[
+                                      i
+                                    ]
+                                  "
                                 >
                                   <svg
                                     viewBox="0 0 100 100"
@@ -106,13 +133,16 @@
                                   >
                                     <path
                                       fill="orange"
-                                      d="
-          M50,0 L58.82,37.86 L97.55,34.55 L64.27,54.64 L78.39,90.45
-          L50,65 L21.61,90.45 L35.73,54.64 L2.45,34.55 L41.18,37.86 Z
-        "
+                                      d="M50,0 L58.82,37.86 L97.55,34.55 L64.27,54.64 L78.39,90.45 L50,65 L21.61,90.45 L35.73,54.64 L2.45,34.55 L41.18,37.86 Z"
                                     ></path>
                                   </svg>
                                 </ng-container>
+
+                                <span class="flex items-center">
+                                  <span class="ml-3 text-gray-600"
+                                    >{{ valores.rating }} reviews</span
+                                  >
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -120,12 +150,7 @@
                           <div class="row">
                             <div class="col-md-12">
                               <p>
-                                Lorem ipsum dolor sit amet consectetur,
-                                adipisicing elit. Necessitatibus tempora iste
-                                impedit veritatis laudantium eos optio itaque
-                                culpa dolorum, iusto fugiat perferendis aperiam
-                                vero natus, quis molestiae maiores architecto
-                                ipsa?
+                                {{ valores.review }}
                               </p>
                             </div>
                           </div>

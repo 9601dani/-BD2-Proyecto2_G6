@@ -11,13 +11,15 @@ import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { ShoppingPageComponent } from './pages/shopping-page/shopping-page.component';
 import { PedidoPageComponent } from './pages/pedido-page/pedido-page.component';
 import { UsuarioPageComponent } from './pages/usuario-page/usuario-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { UserRoutingModule } from './user-routing.module';
 import { ModalEdicionUsuarioComponent } from './pages/modal-edicion-usuario/modal-edicion-usuario.component';
-import { ModalComprasComponent } from './pages/modal-compras/modal-compras.component';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ModalComprasComponent } from './pages/modal-compras/modal-compras.component';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     ListAutoresPageComponent,
@@ -41,6 +43,8 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
     UserRoutingModule,
     SlicePipe,
     NgbAlert,
+    FormsModule,
+    DatePipe,
   ],
 })
 export class UserModule {}

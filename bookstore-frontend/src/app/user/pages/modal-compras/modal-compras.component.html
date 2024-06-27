@@ -15,7 +15,7 @@
                   type="text"
                   placeholder="Nombre"
                   [disabled]="true"
-                  value="{{ this.valores.valor }}"
+                  value="{{ this.valores.titulo }}"
                 />
               </mat-form-field>
             </td>
@@ -27,8 +27,10 @@
                   type="number"
                   placeholder="Apellido"
                   min="0"
+                  max="{{ this.valores.cantidad_stock }}"
                   (change)="cuentaDinero($event)"
-                  value="{{ this.valores.dinero }}"
+                  value="{{ this.valores.cantidad_stock }}"
+                  [(ngModel)]="cantidadTotal"
                 />
               </mat-form-field>
             </td>
@@ -40,6 +42,7 @@
                   type="text"
                   placeholder="Apellido"
                   value="{{ this.precioFinal }}"
+                  [(ngModel)]="precioFinal"
                 />
               </mat-form-field>
             </td>
@@ -48,7 +51,21 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-md-12 d-flex justify-content-between">
-          <button mat-fab extended color="primary" class="mx-2">Agregar</button>
+          <button
+            mat-fab
+            extended
+            color="primary"
+            class="mx-2"
+            (click)="
+              this.agregarAlCarro(
+                this.valores,
+                this.cantidadTotal,
+                this.precioFinal
+              )
+            "
+          >
+            Agregar
+          </button>
           <button mat-fab extended (click)="cerrar()" color="warn" class="mx-2">
             Cerrar
           </button>

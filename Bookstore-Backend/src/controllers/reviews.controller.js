@@ -20,6 +20,7 @@ const addReview = async (req, res) => {
 }
 
 const getReviewsByBookId = async (req, res) => {
+    // cambio de nombre
     const reviews = await Review.find({ book_id: req.params.id });
     res.json(reviews);
 }
