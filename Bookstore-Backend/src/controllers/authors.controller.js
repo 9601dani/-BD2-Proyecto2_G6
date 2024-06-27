@@ -31,7 +31,8 @@ const deleteAuthor = async (req, res) => {
 };
 
 const updateAuthor = async (req, res) => {
-    const updated = await Author.updateOne({ _id: req.params }, req.body);
+    const { id } = req.params;
+    const updated = await Author.findByIdAndUpdate(id, req.body, {new: true});
     res.json({ updated: !!updated });
 }
 
