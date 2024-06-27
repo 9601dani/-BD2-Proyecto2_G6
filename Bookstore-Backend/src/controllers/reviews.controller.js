@@ -19,7 +19,8 @@ const addReview = async (req, res) => {
 }
 
 const getReviewsByBookId = async (req, res) => {
-    const reviews = await Review.find({ id_book: req.params.id });
+    // cambio de nombre
+    const reviews = await Review.find({ book_id: req.params.id });
     res.json(reviews);
 }
 

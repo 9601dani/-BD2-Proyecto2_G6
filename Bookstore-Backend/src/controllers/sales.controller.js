@@ -5,7 +5,6 @@ const Users = require("../models/Users");
 const createOrder = async (req, res) => {
   try {
     const { id_usuario, libros, direccion_envio } = req.body;
-
     if (!id_usuario || !libros) {
       return res.status(400).json({
         ok: false,
@@ -34,6 +33,7 @@ const createOrder = async (req, res) => {
         .json({ ok: false, message: "Error al actualizar stock" });
     }
 
+
     await new Order({
       fecha_pedido: formattedDate,
       estado: "En proceso",
@@ -58,10 +58,10 @@ async function validateStock(books) {
     let withoutStock = [];
     for (let i = 0; i < books.length; i++) {
       const book = books[i];
-      const bookDB = await Books.findById(book.id_libro);
-      if (bookDB.cantidad_stockc < book.cantidad) {
+      const bookDB = await Books.findById(book.libro._id);
+      if (bookDB.cantidad_stock < book.cantidad) {
         withoutStock.push(bookDB.titulo);
-      }
+      } 
     }
 
     return withoutStock;
@@ -74,7 +74,8 @@ async function calculateTotalPrice(books) {
   let total = 0;
   for (let i = 0; i < books.length; i++) {
     const book = books[i];
-    total += book.sub_total;
+    // ver que pasa
+    total += book.subtotal;
   }
 
   return total;
@@ -84,13 +85,12 @@ async function updateStock(books) {
   try {
     for (let i = 0; i < books.length; i++) {
       const book = books[i];
-
       const updated = await Books.updateOne(
         {
-          _id: book.id_libro,
+          _id: book.libro._id,
         },
         {
-          $inc: { cantidad_stock: -book.cantidad },
+           $inc: { cantidad_stock: -book.cantidad },
         }
       );
 
