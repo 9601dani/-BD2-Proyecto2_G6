@@ -1,4 +1,5 @@
 const User = require('../models/Users');
+const Shema = require('mongoose').Schema;
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -10,8 +11,16 @@ const login = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            res.status(404).json({ message: 'No existe el usuario', 'ok': false});
-            return;
+            const user = await User.findOne({ username: email });
+            if (!user) {
+                res.status(404).json({ message: 'No existe el usuario', 'ok': false});
+                return
+            }
+            if (user.password !== password) {
+                res.status(401).json({ message: 'Contraseña incorrecta', 'ok': false});
+                return;
+            }
+            res.status(200).json({ user, 'ok': true });
         }
 
         if (user.password !== password) {
@@ -40,6 +49,7 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
     const user = new User(req.body);
+    console.log(user);
     await user.save();
     res.json(user);
 }
