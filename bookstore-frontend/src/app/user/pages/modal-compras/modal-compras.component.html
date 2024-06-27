@@ -15,7 +15,7 @@
                   type="text"
                   placeholder="Nombre"
                   [disabled]="true"
-                  value="{{ this.valores.valor }}"
+                  value="{{ this.valores.titulo }}"
                 />
               </mat-form-field>
             </td>
@@ -27,8 +27,9 @@
                   type="number"
                   placeholder="Apellido"
                   min="0"
+                  max="{{ this.valores.cantidad_stock }}"
                   (change)="cuentaDinero($event)"
-                  value="{{ this.valores.dinero }}"
+                  value="{{ this.valores.cantidad_stock }}"
                 />
               </mat-form-field>
             </td>

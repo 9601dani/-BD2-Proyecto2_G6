@@ -30,12 +30,12 @@
         <div class="col-md-4 mb-4" *ngFor="let valores of obs | async">
           <mat-card class="mat-elevation-z4">
             <mat-card-header>
-              <mat-card-title>Libro x</mat-card-title>
+              <mat-card-title>{{ valores.titulo }}</mat-card-title>
             </mat-card-header>
             <img
               class="img-fluid"
               mat-card-image
-              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+              src="{{ valores.imagen_url }}"
               alt="Photo of a Shiba Inu"
             />
             <mat-card-content>
@@ -47,14 +47,14 @@
                       >Descripción</span
                     >
                   </p>
-                  <p class="text-gray-800">{{ valores.valor }}</p>
+                  <p class="text-gray-800">{{ valores.descripcion }}</p>
                 </div>
                 <div class="col-md-12">
                   <p class="text-gray-600 text-sm font-medium mb-1">
                     <span class="text-xl font-bold text-blue-600">Precio</span>
                   </p>
                   <p class="text-lg font-bold text-green-600">
-                    {{ valores.dinero | currency : "GTQ" : "symbol" : "1.2-2" }}
+                    {{ valores.precio | currency : "Q " : "symbol" : "1.2-2" }}
                   </p>
                 </div>
                 <div class="col-md-12">
@@ -64,14 +64,17 @@
                     >
                   </p>
                   <p class="text-lg font-bold text-green-600">
-                    {{ valores.cantidad }}
+                    {{ valores.cantidad_stock }}
                   </p>
                 </div>
               </div>
 
               <!--botones-->
               <div class="row">
-                <div class="col-md-6 d-flex">
+                <div
+                  class="col-md-6 d-flex"
+                  *ngIf="valores.cantidad_stock !== 0; else mostarotro"
+                >
                   <button
                     mat-raised-button
                     color="primary"
@@ -81,12 +84,17 @@
                     Agregar al Carrito
                   </button>
                 </div>
+                <ng-template #mostarotro>
+                  <div class="col-md-6 d-flex">
+                    <h1>VENDIDO</h1>
+                  </div>
+                </ng-template>
                 <div class="col-md-6 d-flex">
                   <button
                     mat-raised-button
                     style="width: 80%"
                     color="warn"
-                    routerLink="/user/libro/{{ valores.id }}"
+                    (click)="verLibro(valores._id, valores)"
                   >
                     Ver Libro
                   </button>

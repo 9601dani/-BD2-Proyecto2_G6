@@ -5,6 +5,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { ListLibrosPageComponent } from '../list-libros-page/list-libros-page.component';
+import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-modal-compras',
@@ -16,7 +17,8 @@ export class ModalComprasComponent implements OnInit {
   constructor(
     private referencia: MatDialogRef<ListLibrosPageComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public valores: any
+    public valores: any,
+    private carritoServicio: CarritoService
   ) {}
   //funcion para cerrar modal
   cerrar() {
@@ -26,7 +28,7 @@ export class ModalComprasComponent implements OnInit {
   cuentaDinero(event: any) {
     const newValue = event.target.value;
 
-    this.precioFinal = newValue * this.valores.dinero;
+    this.precioFinal = newValue * this.valores.precio;
   }
   ngOnInit(): void {}
 }
