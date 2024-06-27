@@ -80,7 +80,7 @@ const topBooks = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        const user = await User.findById(_id : req.params.id);
+        const user = await User.findById(req.params.id);
         if (!user) {
             res.status(404).json({ message: 'Usuario no encontrado' });
             return;
