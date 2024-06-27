@@ -1,5 +1,5 @@
-const { Review } = require('../models/Reviews');
-const { Book } = require('../models/Books');
+const Review = require('../models/Reviews');
+const Book = require('../models/Books');
 
 const addReview = async (req, res) => {
     const { book_id, user_id, review, rating } = req.body;
@@ -7,11 +7,14 @@ const addReview = async (req, res) => {
     const reviewSaved = await newReview.save();
 
     // Update book rating
-    const reviews = await Review.find({ book_id });
-    let totalRating = 0;
-    reviews.forEach(review => totalRating += review.rating);
-    const bookRating = totalRating / reviews.length;
-    await Book.updateOne({ _id: book_id }, { puntuacion_promedio: bookRating });
+    const bookRating = await Review.aggregate(
+        [
+            { $match: { book_id: book_id } },
+            { $group: { _id: null, avg: { $avg: "$rating" } } }
+        ]
+    );
+
+    await Book.updateOne({ _id: book_id }, { puntuacion_promedio: bookRating[0].avg });
 
     res.json({ message: 'Review added', value: reviewSaved });
 }
