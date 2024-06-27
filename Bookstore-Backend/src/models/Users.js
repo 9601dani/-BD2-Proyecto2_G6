@@ -5,7 +5,7 @@ const model = mongoose.model;
 const userSchema = new Schema({
     _id : {
         type : Schema.Types.ObjectId,
-        default : () => new mongoose.Types.ObjectId()
+        auto: true
     },
     username : String,
     password : String,

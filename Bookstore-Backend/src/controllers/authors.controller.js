@@ -1,15 +1,13 @@
 const Author = require('../models/Authors');
 
-const getAll = async (req, res, next) => {
+const getAll = async (req, res) => {
     const authors = await Author.find();
     res.json(authors);
-    next()
 };
 
-const getAuthorsActive = async (req, res, next) => {
+const getAuthorsActive = async (req, res) => {
     const authors = await Author.find({ active: true });
     res.json(authors);
-    next()
 };
 
 const getAuthorById = async (req, res, next) => {

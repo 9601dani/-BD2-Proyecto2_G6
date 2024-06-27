@@ -4,11 +4,11 @@ const model = mongoose.model;
 
 const booksSchema = new Schema({
     _id : {
-        type : Schema.Types.ObjectId,
-        default : () => new mongoose.Types.ObjectId()
+        type: Schema.Types.ObjectId,
+        auto: true
     },
     titulo: String,
-    autor: String,
+    autor: {type: Schema.Types.ObjectId, ref: 'Authors'},
     descripcion: String,
     genero: String,
     fecha_publicacion: {
