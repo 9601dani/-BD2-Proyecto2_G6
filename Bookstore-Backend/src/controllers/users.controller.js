@@ -78,6 +78,20 @@ const topBooks = async (req, res) => {
     res.json(books);
 }
 
+const getUserById = async (req, res) => {
+    try {
+        const user = await User.findById(_id : req.params.id);
+        if (!user) {
+            res.status(404).json({ message: 'Usuario no encontrado' });
+            return;
+        }
+
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener ', error: error.message });
+    }
+}
+
 
 
 
@@ -88,5 +102,6 @@ module.exports = {
     changeStatus,
     topBooks,
     getOrders,
-    login
+    login,
+    getUserById
 };
