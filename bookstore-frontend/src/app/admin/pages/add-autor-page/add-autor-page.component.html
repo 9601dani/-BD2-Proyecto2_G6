@@ -1,1 +1,93 @@
-<p>add-autor-page works!</p>
+<h1>
+  {{ currentAutor._id ? 'Editar' : 'Agregar' }}
+  autor
+  <small *ngIf="currentAutor._id">{{ currentAutor.name | titlecase }}</small>
+</h1>
+
+<mat-divider class="mb-2"></mat-divider>
+
+<div class="grid">
+
+  <div class="col-12 sm:col-6">
+    <mat-card>
+      <mat-card-content>
+
+        <form class="grid"
+              autocomplete="off"
+              [formGroup]="miFormulario">
+
+          <mat-form-field class="col-12">
+
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              formControlName="name"
+            />
+
+          </mat-form-field>
+
+
+          <mat-form-field class="col-12">
+
+            <mat-label>Biografía</mat-label>
+            <textarea matInput
+                      type="text"
+                      required
+                      formControlName="biography">
+            </textarea>
+
+          </mat-form-field>
+
+          <div class="col-12">
+            <mat-label>
+              Imagen
+              <mat-icon >add_photo_alternate</mat-icon>
+            </mat-label>
+            <input type="file"
+                   (change)="cambiarImagen($event)"
+                   accept="image/*"
+                   multiple="false">
+          </div>
+
+
+        </form>
+
+        <div class="flex justify-content-between">
+          <button
+            *ngIf="currentAutor._id"
+            (click)="onDeleteAutor()"
+            mat-flat-button
+            color="warn"
+          >
+            Borrar
+          </button>
+          <span></span>
+
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="miFormulario.invalid"
+            (click)="onSubmit()"
+          >
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-12 sm:col-6 ">
+
+    <mat-card class="justify-content-center">
+
+      <img *ngIf="!imgTemp" [src]=" autorTmp | autorImagen" mat-card-image>
+      <img *ngIf="imgTemp" [src]="imgTemp" mat-card-image>
+    </mat-card>
+
+  </div>
+</div>

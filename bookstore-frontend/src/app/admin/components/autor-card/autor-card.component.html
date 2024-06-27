@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ autor.name | titlecase }}</mat-card-title>
+  </mat-card-header>
+
+  <img mat-card-image [src]="imagenUrl" [alt]="autor.name">
+
+  <mat-card-content class="mt-2">
+    <p>
+      <strong>Biografia</strong> {{ autor.biography }}
+    </p>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions>
+
+    <div class="grid">
+
+      <div class="col-12">
+        <div class="flex justify-content-right">
+          <span class="spacer"></span>
+          <button mat-button
+                  [routerLink]="['/admin/edit-autor', autor._id]"
+                  mat-raised>
+            <mat-icon>more_horiz</mat-icon>
+              Más
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card-actions>
+
+</mat-card>
