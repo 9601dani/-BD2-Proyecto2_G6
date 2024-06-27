@@ -7,13 +7,14 @@ const addReview = async (req, res) => {
     const reviewSaved = await newReview.save();
 
     // Update book rating
-    const reviews = await Review.find({ book_id });
-    let totalRating = 0;
-    for(const review of reviews) {
-        totalRating += review?.rating;
-    }
-    const bookRating = totalRating / reviews.size;
-    await Book.updateOne({ _id: book_id }, { puntuacion_promedio: bookRating });
+    const bookRating = await Review.aggregate(
+        [
+            { $match: { book_id: book_id } },
+            { $group: { _id: null, avg: { $avg: "$rating" } } }
+        ]
+    );
+
+    await Book.updateOne({ _id: book_id }, { puntuacion_promedio: bookRating[0].avg });
 
     res.json({ message: 'Review added', value: reviewSaved });
 }
