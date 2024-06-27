@@ -1,6 +1,7 @@
 const { uploadFile, updateFile } = require('../helpers/uploadFile');
-const path  = require('path');
+require('dotenv').config();
 
+const AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 
 const addImage = async (req, res) => {
     try {
@@ -27,9 +28,9 @@ const updateImage = async (req, res) => {
 
 const getImage = (req, res) => {
     const { image } = req.params;
-    console.log(image);
-    const pathImage = path.join(__dirname, '../uploads/images', image);
-    res.sendFile(pathImage);
+    
+    const imageUrl = `https://${AWS_BUCKET_NAME}.s3.amazonaws.com/${image}`;
+    res.redirect(imageUrl);
 }
 
 module.exports = {
