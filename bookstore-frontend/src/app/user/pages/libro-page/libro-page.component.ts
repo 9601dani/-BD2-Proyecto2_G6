@@ -13,9 +13,10 @@ import { reviews } from '../../interfaces/reviews';
 })
 export class LibroPageComponent implements OnInit {
   libro!: books;
-  puntuaciones: reviews[] = [];
+  puntuaciones!: reviews[];
   cantidadPuntuacion!: Number;
   ArrayPuntuacion: number[] = [];
+  ArregloEspecificoPuntuaciones: Number[][] = [];
   panelAbierto: boolean = false;
 
   constructor(private puntuacionServicio: PuntuacionService) {}
@@ -38,13 +39,31 @@ export class LibroPageComponent implements OnInit {
   obtenerPuntuaciones(id: string) {
     this.puntuacionServicio
       .obtenerTodasPuntuacionLibro(id)
-      .subscribe((elementos: reviews) => {
-        this.puntuaciones.push(elementos);
+      .subscribe((elementos: reviews[]) => {
+        console.log(elementos);
+        this.puntuaciones = elementos;
       });
   }
+
+  // funcuin para las puntuacions
+
+  verEstrellasEspecificas(puntuaciom: Number, indice: number) {
+    if (puntuaciom !== undefined) {
+      const valorCantidad = Math.round(puntuaciom.valueOf());
+      this.ArregloEspecificoPuntuaciones[indice] = Array.from(
+        { length: valorCantidad },
+        (_, index) => index + 1
+      );
+    } else {
+      this.ArregloEspecificoPuntuaciones[indice] = [];
+    }
+  }
+
   ngOnInit(): void {
     this.libro = history.state.item;
     this.obtenerPuntuaciones(this.libro._id);
+    console.log(this.puntuaciones);
+
     this.verEstrellas();
   }
 }

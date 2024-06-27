@@ -14,9 +14,9 @@ export class PuntuacionService {
   constructor(private http: HttpClient, private authSerive: AuthService) {}
 
   //funcion para obtener todas las puntuaciones en base a un libro
-  obtenerTodasPuntuacionLibro(id: string): Observable<reviews> {
+  obtenerTodasPuntuacionLibro(id: string): Observable<reviews[]> {
     console.log(`${this.baseUrl}/reviews/${id}`);
 
-    return this.http.get<reviews>(`${this.baseUrl}/reviews/${id}`);
+    return this.http.get<reviews[]>(`${this.baseUrl}/reviews/${id}`);
   }
 }

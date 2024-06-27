@@ -46,6 +46,8 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
     MatPaginatorModule,
     MatExpansionModule,
     MatBadgeModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
 })
 export class MaterialModule {}

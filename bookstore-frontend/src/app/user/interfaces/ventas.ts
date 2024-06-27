@@ -1,5 +1,7 @@
+import { books } from './books';
+
 export interface ventas {
-  fecha_pedido: String;
+  fecha_pedido: Date;
   estado: String;
   precio_total: Number;
   id_usuario: string;
@@ -9,7 +11,7 @@ export interface ventas {
 }
 
 export interface detalle {
-  id_libro: string;
-  subtotal: Number;
+  libro: books;
+  sub_total: Number;
   cantidad: Number;
 }
