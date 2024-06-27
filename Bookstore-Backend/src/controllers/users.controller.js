@@ -1,4 +1,5 @@
 const User = require('../models/Users');
+const Shema = require('mongoose').Schema;
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -48,7 +49,7 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
     const user = new User(req.body);
-    user._id = new mongoose.Types.ObjectId();
+    console.log(user);
     await user.save();
     res.json(user);
 }
