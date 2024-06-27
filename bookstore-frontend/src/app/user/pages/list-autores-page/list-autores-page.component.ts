@@ -14,10 +14,10 @@ export class ListAutoresPageComponent implements OnInit {
   constructor(private authorsService: AuthorsService) { }
 
   ngOnInit(): void {
-    this.fetchAutores();
+    this.getAutores();
   }
 
-  fetchAutores() {
+  getAutores() {
     this.authorsService.getAutores().subscribe(
       autores => {
         this.autores = autores;

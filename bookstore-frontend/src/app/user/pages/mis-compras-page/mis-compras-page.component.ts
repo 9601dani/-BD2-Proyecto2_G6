@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+// src/app/pages/mis-compras-page/mis-compras-page.component.ts
+import { Component, OnInit } from '@angular/core';
+import { OrdersService } from '../../services/orders.service'; 
+import { Order } from '../../interfaces/order.interface'; 
 
 @Component({
   selector: 'app-mis-compras-page',
@@ -9,25 +9,36 @@ import { Observable } from 'rxjs';
   styleUrls: ['./pedidos.css'],
 })
 export class MisComprasPageComponent implements OnInit {
-  sumaTotal: number = 500;
-  allItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  orders: Order[] = [];
 
-  // que mire el objeto de paginator
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  // tenemos el observable
-  obs!: Observable<any>;
-  // generamos la info
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>(
-    this.allItems
-  );
-
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
-  //inicio
-  ngOnInit() {
-    // solo que detecte cambos y genere el paginator
-    this.changeDetectorRef.detectChanges();
-    this.dataSource.paginator = this.paginator;
-    this.obs = this.dataSource.connect();
-    console.log(this.dataSource.filteredData);
+  constructor(private ordersService: OrdersService) {
+    this.getOrdersByUserId();
+    //this.getOrders();
   }
+
+
+  public getOrders(){
+    this.ordersService.getOrders().subscribe(orders => {
+      if(!orders){
+        return;
+      }
+      this.orders = orders;
+      console.log('Ordenes de todos los usuarios: ', orders)
+    })
+  }
+
+  public getOrdersByUserId(){
+    this.ordersService.getOrdersByUser('667d0f588e637d0bf5ab7736').subscribe(orders => {
+      if(!orders){
+        return;
+      }
+      this.orders = orders;
+      console.log('Ordenes: ', orders)
+    })
+  }
+
+  ngOnInit():void  {
+    
+  }
+
 }
