@@ -25,7 +25,7 @@
                 <input
                   matInput
                   type="number"
-                  placeholder="Apellido"
+                  placeholder="Cantidad"
                   min="0"
                   max="{{ this.valores.cantidad_stock }}"
                   (change)="cuentaDinero($event)"
@@ -40,7 +40,7 @@
                 <input
                   matInput
                   type="text"
-                  placeholder="Apellido"
+                  placeholder="Precio"
                   value="{{ this.precioFinal }}"
                   [(ngModel)]="precioFinal"
                 />

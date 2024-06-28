@@ -5,7 +5,7 @@
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #333;
+  color: #fffefe;
 }
 
 .table th,
@@ -44,5 +44,5 @@
 
 .libro-info {
   margin-left: 10px;
-  color: #666;
+  color: #ffffff;
 }
