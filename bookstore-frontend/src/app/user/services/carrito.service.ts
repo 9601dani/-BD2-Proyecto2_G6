@@ -94,7 +94,7 @@ export class CarritoService {
       estado: 'en proceso',
       precio_total: precioTotal,
       // aca falta el id del usuario logeado
-      id_usuario: '667d978aa237593ddd53bf8e',
+      id_usuario: this.usuarioServicio.usuario._id,
       direccion_envio: direccion_envio,
       metodo_pago: metodo_pago,
       libros: this._carrito,

@@ -98,7 +98,7 @@ export class CartPageComponent implements OnInit {
     if (libro) {
       const nuevaResenia = {
         id_book: id,
-        id_user: '667d978aa237593ddd53bf8e',
+        id_user: this.usuarioServicio.usuario._id,
         rating: libro.ratings.toString(),
         review: libro.review,
       };
