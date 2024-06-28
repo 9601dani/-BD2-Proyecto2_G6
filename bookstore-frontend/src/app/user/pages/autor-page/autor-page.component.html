@@ -7,7 +7,7 @@
 
       <div class="row mt-4" *ngIf="autor">
         <div class="col-md-6">
-          <img class="img-fluid" [src]="autor.photo" alt="Foto del autor" />
+          <img class="img-fluid" [src]=" ruta +  autor.photo" alt="Foto del autor" />
           <h2>Biografía</h2>
           <p>{{ autor.biography }}</p>
         </div>

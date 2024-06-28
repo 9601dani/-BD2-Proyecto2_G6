@@ -4,6 +4,7 @@ import { OrdersService } from '../../services/orders.service';
 import { Order } from '../../interfaces/order.interface';
 import { books } from '../../interfaces/books';
 import { LibrosService } from '../../services/libros.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-mis-compras-page',
@@ -18,9 +19,11 @@ export class MisComprasPageComponent implements OnInit {
 
   constructor(
     private ordersService: OrdersService,
-    private librosService: LibrosService
+    private librosService: LibrosService,
+    private usuarioServicio: AuthService
+
   ) {
-    //this.getOrders();
+    this.getOrdersByUserId();
   }
 
   public getOrders() {
@@ -35,7 +38,7 @@ export class MisComprasPageComponent implements OnInit {
 
   public getOrdersByUserId() {
     this.ordersService
-      .getOrdersByUser('667d978aa237593ddd53bf8e')
+      .getOrdersByUser(this.usuarioServicio.usuario._id)
       .subscribe((orders: any) => {
         if (!orders) {
           return;
@@ -62,9 +65,9 @@ export class MisComprasPageComponent implements OnInit {
       this.books2.push(orderBooks);
     });
 
-    console.log(this.books2);
-    console.log(this.books2[42]);
-    console.log(this.books2[42].length);
+    // console.log(this.books2);
+    // console.log(this.books2[42]);
+    // console.log(this.books2[42].length);
     // this.books2[42][0] = 'hola';
     this.books2.forEach((element: any) => {
       element.array.forEach((element2: any) => {

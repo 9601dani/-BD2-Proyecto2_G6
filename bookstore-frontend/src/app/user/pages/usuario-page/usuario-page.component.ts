@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalEdicionUsuarioComponent } from '../modal-edicion-usuario/modal-edicion-usuario.component';
 import { UsersService } from '../../services/users.service';
 import { Usuario } from '../../interfaces/usuario.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-usuario-page',
@@ -14,13 +15,15 @@ export class UsuarioPageComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private usuarioService: UsersService
+    private usuarioService: UsersService,
+    private usuarioServicio: AuthService
   ) {
     this.getUser();
   }
 
   getUser() {
-    this.usuarioService.getUserByID('667d0f588e637d0bf5ab7736').subscribe(usuario => {
+    
+    this.usuarioService.getUserByID(this.usuarioServicio.usuario._id).subscribe(usuario => {
       if (usuario) {
         this.usuario = usuario;
       }

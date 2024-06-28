@@ -10,13 +10,13 @@
       <!-- Búsqueda de Autores -->
       <div class="row">
         <div class="col-md-10">
-          <mat-form-field appearance="fill" class="w-full">
+          <mat-form-field appearance="fill" class="w-full" >
             <mat-label>Buscar un Autor</mat-label>
-            <input matInput type="text" placeholder="Autor" />
+            <input matInput type="text" placeholder="Autor" [(ngModel)]="nombreLibro"/>
           </mat-form-field>
         </div>
         <div class="col-md-2">
-          <button mat-raised-button color="primary" style="width: 90%" class="w-full">
+          <button mat-raised-button color="primary" style="width: 90%" class="w-full" (click)="getAutoresNombres()">
             Buscar Autor
           </button>
         </div>
@@ -29,7 +29,7 @@
             <mat-card-header>
               <mat-card-title>{{ autor.name }}</mat-card-title>
             </mat-card-header>
-            <img class="img-fluid" mat-card-image [src]="autor.photo|imagen" alt="Foto del autor" />
+            <img class="img-fluid" mat-card-image [src]= "this.ruta + autor.photo"   alt="Foto del autor" />
             <mat-card-content>
               <hr />
               <div>

@@ -22,7 +22,7 @@ interface tipoFiltro {
 export class ListLibrosPageComponent implements OnInit {
   listadoAutores!: libros[];
   texto!: string;
-
+  public ruta = "https://demo-usac-upload-image.s3.amazonaws.com/"
   // que mire el objeto de paginator
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   // tenemos el observable

@@ -6,6 +6,7 @@ import { books } from '../../interfaces/books';
 import { ReviewsService } from '../../services/reviews.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart-page',
@@ -87,6 +88,10 @@ export class CartPageComponent implements OnInit {
             };
             this.librosComprados.push(libroComprado);
           }
+          Swal.fire({  title: "Pedido realizado con éxito",
+          text: "Registro exitoso del pedido",
+          icon: "success"
+        });
         }
       });
   }
@@ -104,6 +109,10 @@ export class CartPageComponent implements OnInit {
       };
 
       this.reseniaServicio.enviarResenias(nuevaResenia).subscribe();
+      Swal.fire({  title: "Reseña realizada con éxito",
+      text: "Registro exitoso de su reseña, gracias por su tiempo.",
+      icon: "success"
+      });
     }
   }
   ngOnInit(): void {

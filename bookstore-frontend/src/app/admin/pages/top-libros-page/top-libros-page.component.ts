@@ -9,13 +9,14 @@ import { ReporteService } from '../../services/reporte.service';
   ]
 })
 export class TopLibrosPageComponent implements OnInit {
-  columnas: string[] = ['No.', 'Total de Ventas', 'Nombre del Libro'];
+  columnas: string[] = ['No.', 'Total de Ventas', 'Nombre del Libro', 'Género', 'Autor', 'Puntuacion'];
   reportes: ReporteExit[] = [];
 
   constructor( private reporteService: ReporteService ){}
 
   ngOnInit(): void {
     this.reporteService.getTopBooks().subscribe( res => {
+      console.log(res)
       this.reportes = res
     })
   }

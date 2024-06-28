@@ -51,5 +51,12 @@ export class AuthorsService {
       );
   }
 
+  getAutorByName( name: string ): Observable<Autor[]|undefined> {
+    return this.http.get<Autor[]>(`${ this.baseUrl }/authors/name/${ name }`)
+      .pipe(
+        catchError( error => of(undefined) )
+      );
+  }
+
 
 }

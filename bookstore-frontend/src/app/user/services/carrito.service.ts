@@ -6,6 +6,7 @@ import { books } from '../interfaces/books';
 import { detalle, ventas } from '../interfaces/ventas';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { Estado } from 'src/app/admin/interfaces/order.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -91,7 +92,7 @@ export class CarritoService {
     const fechaActual = new Date();
     const generarVenta: ventas = {
       fecha_pedido: fechaActual,
-      estado: 'en proceso',
+      estado: Estado.enProceso,
       precio_total: precioTotal,
       // aca falta el id del usuario logeado
       id_usuario: this.usuarioServicio.usuario._id,

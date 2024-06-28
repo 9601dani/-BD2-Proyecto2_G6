@@ -11,7 +11,7 @@ export interface Order{
 }
 
 export interface LibrosComprados {
-  id_libro        : string;
+  _id        : string;
   subtotal        : number;
   cantidad        : number;
 }

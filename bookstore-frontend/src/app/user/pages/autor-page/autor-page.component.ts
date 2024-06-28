@@ -11,6 +11,8 @@ import { AuthorsService } from '../../services/authors.service';
 export class AutorPageComponent implements OnInit {
   autor: Autor | undefined;
 
+  public ruta = "https://demo-usac-upload-image.s3.amazonaws.com/"
+
   constructor(
     private route: ActivatedRoute,
     private authorsService: AuthorsService

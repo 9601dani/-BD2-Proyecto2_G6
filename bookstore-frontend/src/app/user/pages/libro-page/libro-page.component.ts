@@ -23,6 +23,7 @@ export class LibroPageComponent implements OnInit {
   ArrayPuntuacion: number[] = [];
   ArregloEspecificoPuntuaciones: Number[][] = [];
   panelAbierto: boolean = false;
+  public ruta = "https://demo-usac-upload-image.s3.amazonaws.com/"
 
   constructor(
     private puntuacionServicio: PuntuacionService,

@@ -7,6 +7,7 @@ import { filter, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 import { LibroService } from '../../services/libro.service';
 import { Libro } from '../../interfaces/libro.interface';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pedido-card',
@@ -17,23 +18,26 @@ import { Libro } from '../../interfaces/libro.interface';
 export class PedidoCardComponent implements OnInit{
   @Input() order!: Order;
   nombreComprador !: string;
-  nombreLibros !: string[];
+  nombreLibros : string[] = [];
   libroEncontrado !: Libro;
   orderMap = {
     '=1'      : 'Unidad',
     'other'   : 'Unidades'
   }
-  dialog: any;
+  
   constructor( private snackbar: MatSnackBar,
                private orderService: OrderService,
-               private router: Router,){}
+               private router: Router,
+               private dialog:MatDialog){}
 
   ngOnInit(): void {
     this.orderService.getUsuario( this.order.id_usuario ).subscribe( res => {
       for( let libro of this.order.libros ){
-
-        this.orderService.getLibrosByID( libro.id_libro ).subscribe( res=>{
-          this.nombreLibros.push( res.titulo )
+        console.log(libro)
+        this.orderService.getLibrosByID( libro._id ).subscribe( (res:any)=>{
+          
+          this.nombreLibros.push( res[0].titulo )
+          
         })
       }
       this.nombreComprador = res.complete_name;

@@ -22,7 +22,7 @@ export class UsersService {
   }
 
   getUserByID(id: string): Observable<Usuario|undefined>{
-    return this.http.get<Usuario>(`${ this.baseUrl }/users/${id}`)
+    return this.http.get<Usuario>(`${ this.baseUrl }/users/find/${id}`)
     .pipe(
       catchError( error => of(undefined) )
     );

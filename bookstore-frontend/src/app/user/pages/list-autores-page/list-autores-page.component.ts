@@ -10,11 +10,29 @@ import { AuthorsService } from '../../services/authors.service';
 })
 export class ListAutoresPageComponent implements OnInit {
   autores: Autor[] = [];
+  autoresBusqueda: Autor[] = [];
+  
+
+  public ruta = "https://demo-usac-upload-image.s3.amazonaws.com/"
+  nombreLibro = ''
 
   constructor(private authorsService: AuthorsService) { }
 
   ngOnInit(): void {
     this.getAutores();
+  }
+
+  getAutoresNombres(){
+    this.authorsService.getAutorByName(this.nombreLibro).subscribe(
+      (autor:any) => {
+        
+        this.autores = autor
+        
+      },
+      error => {
+        console.error('Error al recuperar los autores:', error);
+      }
+    );
   }
 
   getAutores() {

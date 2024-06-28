@@ -23,8 +23,9 @@ export class ListPedidosPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.getOrdenes()
-      .subscribe( ordenes =>{
-        this.ordenes = ordenes
+      .subscribe( (ordenes:any) =>{
+        this.ordenes = ordenes.orders
+        console.log(ordenes)
       } );
   }
 
