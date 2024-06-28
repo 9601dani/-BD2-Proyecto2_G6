@@ -1,4 +1,6 @@
 const User = require('../models/Users');
+const Order = require('../models/Orders');
+const Book = require('../models/Books');
 const Shema = require('mongoose').Schema;
 
 const login = async (req, res) => {
@@ -75,13 +77,39 @@ const changeStatus = async (req, res) => {
 }
 
 const topBooks = async (req, res) => {
-    const books = await User.find().sort({books_sold: -1}).limit(15);
-    if (books==null || books.length==0 || !books) {
-        res.status(404).json({message: 'Books not found'});
-        return;
+    try {
+        const top_books = await Order.aggregate([
+            { $unwind: '$libros' },
+            { $group: { _id: '$libros.id_libro', total: { $sum: '$libros.cantidad' } } },
+            { $sort: { total: -1 } },
+            { $limit: 10 }
+        ]);
+
+        if (!top_books || top_books.length === 0) {
+            res.status(404).json({ message: 'Libros no encontrados' });
+            return;
+        }
+
+        const bookIds = top_books.map(book => book._id);
+        const books = await Book.find({ _id: { $in: bookIds } })
+            .populate('author')
+            .exec();
+
+        const result = top_books.map(book => {
+            const bookDetail = books.find(b => b._id.toString() === book._id.toString());
+            return {
+                _id: book._id,
+                total: book.total,
+                book_details: bookDetail
+            };
+        });
+
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Error interno del servidor', error: error.message });
     }
-    res.json(books);
 }
+
 
 const getUserById = async (req, res) => {
     try {
