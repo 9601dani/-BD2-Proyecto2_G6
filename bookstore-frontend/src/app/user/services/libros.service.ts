@@ -18,4 +18,12 @@ export class LibrosService {
   obtenerTodosLibros(): Observable<books> {
     return this.http.get<books>(`${this.baseUrl}/books/all`);
   }
+
+  //fucnion para los filtros de busqueda
+
+  determinaBusqueda(tipo: string, valor: string): Observable<books> {
+    return this.http.get<books>(
+      `${this.baseUrl}/books/filter/${tipo}/${valor}`
+    );
+  }
 }

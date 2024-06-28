@@ -34,13 +34,16 @@ export class ModalEdicionUsuarioComponent implements OnInit {
 
   actualizarUsuario() {
     if (this.usuarioForm.valid) {
-      const updatedUser: Usuario = { ...this.usuarioForm.value, _id: this.usuario?._id };
+      const updatedUser: Usuario = {
+        ...this.usuarioForm.value,
+        _id: this.usuario?._id,
+      };
       this.usuarioService.updateUser(updatedUser).subscribe(
         () => {
           this.dialogRef.close(true); // Cierra el modal indicando éxito
           this.usuarioActualizado.emit(); // Emitir evento de actualización
         },
-        error => {
+        (error) => {
           console.error('Error actualizando usuario:', error);
           // Aquí puedes manejar el error según tus necesidades (por ejemplo, mostrar un mensaje de error)
         }

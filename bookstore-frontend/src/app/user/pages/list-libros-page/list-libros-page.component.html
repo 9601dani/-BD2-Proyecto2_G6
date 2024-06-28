@@ -7,18 +7,35 @@
       </div>
       <!--para la busqeuda-->
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
           <mat-form-field appearance="fill" class="w-full">
             <mat-label>Busca un Libro</mat-label>
-            <input matInput type="text" placeholder="Libro" />
+            <input
+              matInput
+              type="text"
+              placeholder="Libro"
+              [(ngModel)]="texto"
+            />
           </mat-form-field>
         </div>
+        <div class="col-md-2">
+          <mat-form-field>
+            <mat-label>Filtros de busqueda</mat-label>
+            <mat-select [(ngModel)]="selectedValue" name="Filtro">
+              <mat-option *ngFor="let tipo of tipoFiltro" [value]="tipo.valor">
+                {{ tipo.valor }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
         <div class="col-md-2">
           <button
             mat-raised-button
             color="primary"
             style="width: 90%"
             class="w-full"
+            (click)="this.tipoBusqueda()"
           >
             Buscar Libro
           </button>

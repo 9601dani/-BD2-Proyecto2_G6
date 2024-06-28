@@ -4,6 +4,7 @@ import { detalle } from '../../interfaces/ventas';
 import { reviews } from '../../interfaces/reviews';
 import { books } from '../../interfaces/books';
 import { ReviewsService } from '../../services/reviews.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -36,7 +37,8 @@ export class CartPageComponent implements OnInit {
   }
   constructor(
     private carritoServicio: CarritoService,
-    private reseniaServicio: ReviewsService
+    private reseniaServicio: ReviewsService,
+    private usuarioServicio: AuthService
   ) {}
 
   // ahora si aca todo el funcionamiento
@@ -89,7 +91,7 @@ export class CartPageComponent implements OnInit {
     if (libro) {
       const nuevaResenia = {
         id_book: id,
-        id_user: '667d97d5a237593ddd53bf8f',
+        id_user: this.usuarioServicio.usuario._id,
         rating: libro.ratings.toString(),
         review: libro.review,
       };
@@ -99,6 +101,8 @@ export class CartPageComponent implements OnInit {
   }
   ngOnInit(): void {
     // se le asigna el observable
+    console.log(this.usuarioServicio.usuario._id);
+
     this.carritoServicio.carrito$.subscribe((productos) => {
       this.productos = productos;
       this.sumaTotalFunc();
