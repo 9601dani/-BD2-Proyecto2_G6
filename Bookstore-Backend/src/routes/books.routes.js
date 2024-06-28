@@ -11,5 +11,6 @@ router.delete(`${api}/delete/:id`, BooksController.deleteBook);
 router.put(`${api}/update/:id`, BooksController.updateBook);
 router.get(`${api}/puntuacion/:id`, BooksController.getPuntuacionById);
 router.get(`${api}/author/:id`, BooksController.getBooksByAuthorId);
+router.get(`${api}/filter/:filter/:value`, BooksController.getBooksByFilter);
 
 module.exports = router;
