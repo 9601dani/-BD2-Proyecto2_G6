@@ -29,14 +29,7 @@ export class AutorCardComponent {
   ngOnInit(): void {
     if ( !this.autor ) throw Error('Autor property is required');
 
-    this.autorService.getImgById(this.autor.photo).subscribe(
-      blob => {
-        if (blob) {
-          this.imagenUrl = URL.createObjectURL(blob);
-        }
-      },
-      error => console.error(error)
-    );
+    this.imagenUrl = `https://demo-usac-upload-image.s3.amazonaws.com/${ this.autor.photo }`
 
   }
 }

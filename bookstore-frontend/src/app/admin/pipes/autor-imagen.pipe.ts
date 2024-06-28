@@ -11,7 +11,7 @@ export class AutorImagenPipe implements PipeTransform {
     transform( autor: Autor  ): string {
     if ( autor.photo ) {
 
-      return `http://localhost:3200/images/${ autor.photo }`;
+      return `https://demo-usac-upload-image.s3.amazonaws.com/${ autor.photo }`;
     }
 
     return `assets/images/no-image.jpg`;

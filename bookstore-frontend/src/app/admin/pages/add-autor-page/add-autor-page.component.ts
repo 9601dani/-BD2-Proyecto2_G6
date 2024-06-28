@@ -62,9 +62,6 @@ export class AddAutorPageComponent {
 
         this.miFormulario.reset( autor );
 
-        // Establecer el formulario como inválido
-        this.miFormulario.setErrors({ invalid: true });
-
         return;
 
       });
@@ -78,7 +75,7 @@ export class AddAutorPageComponent {
       this.actualizarImagen( this.autorTmp );
       this.autorService.updateAutor( this.currentAutor )
                             .subscribe( autor => {
-                              this.showSnackbar( `${ autor.name } actualizado correctamente!`)
+                              this.showSnackbar( `${ this.currentAutor.name } actualizado correctamente!`)
                             });
       return;
     }

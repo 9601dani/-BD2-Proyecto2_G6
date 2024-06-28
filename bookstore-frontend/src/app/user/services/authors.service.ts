@@ -30,9 +30,9 @@ export class AuthorsService {
     return this.http.post<ResponseAutor>(`${ this.baseUrl }/authors/add/`, resto)
   }
 
-  updateAutor( autor: Autor ): Observable<Autor> {
+  updateAutor( autor: Autor ): Observable<ResponseAutor> {
     if ( !autor._id ) throw Error('Autor id is required');
-    return this.http.put<Autor>(`${ this.baseUrl }/authors/update/${ autor._id }`, autor );
+    return this.http.put<ResponseAutor>(`${ this.baseUrl }/authors/update/${ autor._id }`, autor );
   }
 
   deleteAutorById( id: string ): Observable<boolean> {
@@ -51,5 +51,5 @@ export class AuthorsService {
       );
   }
 
-  
+
 }
