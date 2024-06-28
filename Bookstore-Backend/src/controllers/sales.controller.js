@@ -107,31 +107,6 @@ async function updateStock(books) {
   }
 }
 
-async function updateStock(books) {
-  try {
-    for (let i = 0; i < books.length; i++) {
-      const book = books[i];
-
-      const updated = await Books.updateOne(
-        {
-          _id: book.id_libro,
-        },
-        {
-          $inc: { cantidad_stock: -book.cantidad },
-        }
-      );
-
-      if (updated.matchedCount !== 1) {
-        return false;
-      }
-    }
-
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
-
 const getOrders = async (req, res) => {
   try {
     const orders = await Order.find();
