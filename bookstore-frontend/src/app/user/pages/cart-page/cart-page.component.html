@@ -54,7 +54,7 @@
                   </th>
                   <td mat-cell *matCellDef="let element" class="px-4 py-3">
                     {{
-                      element.subtotal | currency : "GTQ" : "symbol" : "1.2-2"
+                      element.sub_total | currency : "GTQ" : "symbol" : "1.2-2"
                     }}
                   </td>
                 </ng-container>
@@ -148,5 +148,72 @@
     <ngb-alert [dismissible]="false">
       <strong>Advertencia</strong> Todo el carrito se ha eliminado
     </ngb-alert>
+  </div>
+
+  <div class="porSitodoBien" *ngIf="this.todoBien">
+    <ngb-alert [type]="'success'" [dismissible]="false">
+      <strong>Bien</strong> Compra realizada con exito. Puede dejar una opinion
+    </ngb-alert>
+
+    <div class="row">
+      <!--generacion de cards-->
+
+      <div class="row">
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">No.</th>
+              <th scope="col">Nombre de libro</th>
+              <th scope="col">Resenia</th>
+              <th scope="col">Cantidad de calificacion</th>
+              <th scope="col">Enviar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let valores of this.librosComprados">
+              <td>{{ valores._id }}</td>
+              <td>{{ valores.titulo }}</td>
+              <td>
+                <div class="col-md-10">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Descripcion</mat-label>
+                    <textarea
+                      matInput
+                      placeholder="Descripcion"
+                      class="custom-textarea"
+                      rows="2"
+                      [(ngModel)]="valores.review"
+                      name="review-{{ valores._id }}"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+              </td>
+              <td>
+                <mat-slider
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  showTickMarks
+                  discrete
+                  [displayWith]="formatLabel"
+                >
+                  <input matSliderThumb [(ngModel)]="valores.ratings" #slider />
+                </mat-slider>
+              </td>
+              <td>
+                <button
+                  mat-raised-button
+                  color="accent"
+                  (click)="this.enviarReview(valores._id)"
+                >
+                  Enviar Resenia
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr class="border-gray-900 border-t-1" />
+      </div>
+    </div>
   </div>
 </section>

@@ -12,6 +12,6 @@ export interface ventas {
 
 export interface detalle {
   libro: books;
-  sub_total: Number;
-  cantidad: Number;
+  sub_total: number;
+  cantidad: number;
 }

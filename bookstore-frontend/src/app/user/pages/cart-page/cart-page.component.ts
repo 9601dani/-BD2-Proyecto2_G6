@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../../services/carrito.service';
 import { detalle } from '../../interfaces/ventas';
+import { reviews } from '../../interfaces/reviews';
+import { books } from '../../interfaces/books';
+import { ReviewsService } from '../../services/reviews.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -13,12 +16,28 @@ export class CartPageComponent implements OnInit {
   //suma
   sumaTotal!: number;
   eliminado: boolean = false;
+  todoBien: boolean = false;
 
   productos: detalle[] = [];
   direccion!: string;
   metodo!: string;
 
-  constructor(private carritoServicio: CarritoService) {}
+  opinionGenerada: reviews[] = [];
+  librosComprados: any[] = [];
+  nombresLibrosComprados: books[] = [];
+
+  // para los reviews
+
+  ratings!: number;
+  review!: string;
+
+  formatLabel(value: number): string {
+    return `${value}`;
+  }
+  constructor(
+    private carritoServicio: CarritoService,
+    private reseniaServicio: ReviewsService
+  ) {}
 
   // ahora si aca todo el funcionamiento
   //sumar
@@ -48,9 +67,36 @@ export class CartPageComponent implements OnInit {
   pagar() {
     this.carritoServicio
       .pagar(this.sumaTotal, this.direccion, this.metodo)
-      .subscribe();
+      .subscribe((response: any) => {
+        //limpia final
+        this.carritoServicio.limpiarTodo();
+        this.todoBien = true;
+
+        for (let i = 0; i < response.libroIds.length; i++) {
+          const libroComprado = {
+            _id: response.libroIds[i],
+            titulo: response.nombres[i],
+          };
+          this.librosComprados.push(libroComprado);
+        }
+      });
   }
 
+  //funcion para enviar resenias
+  enviarReview(id: string) {
+    const libro = this.librosComprados.find((l) => l._id === id);
+
+    if (libro) {
+      const nuevaResenia = {
+        id_book: id,
+        id_user: '667d97d5a237593ddd53bf8f',
+        rating: libro.ratings.toString(),
+        review: libro.review,
+      };
+
+      this.reseniaServicio.enviarResenias(nuevaResenia).subscribe();
+    }
+  }
   ngOnInit(): void {
     // se le asigna el observable
     this.carritoServicio.carrito$.subscribe((productos) => {

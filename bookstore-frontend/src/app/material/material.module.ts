@@ -22,6 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   exports: [
@@ -48,6 +49,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
     MatBadgeModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSliderModule,
   ],
 })
 export class MaterialModule {}
