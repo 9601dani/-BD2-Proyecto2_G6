@@ -3,13 +3,18 @@ const Schema = mongoose.Schema;
 const model = mongoose.model;
 
 const booksSchema = new Schema({
-
-    _id: Schema.ObjectId,
+    _id : {
+        type: Schema.Types.ObjectId,
+        auto: true
+    },
     titulo: String,
-    autor: String,
+    autor: {type: Schema.Types.ObjectId, ref: 'Authors'},
     descripcion: String,
     genero: String,
-    fecha_publicacion: Date,
+    fecha_publicacion: {
+        type : Date,
+        default : new Date()
+    },
     disponibilidad: Boolean,
     cantidad_stock: Number,
     puntuacion_promedio: Number,

@@ -11,10 +11,10 @@ const getBookById = async (req, res) => {
 }
 
 const addBook = async (req, res) => {
-    const { titulo, autor, descripcion, genero, fecha_publicacion, disponibilidad, cantidad_stock, puntuacion_primedio, precio,  imagen_url } = req.body;
+    const { titulo, autor, descripcion, genero, fecha_publicacion, disponibilidad, cantidad_stock, puntuacion_promedio, precio,  imagen_url } = req.body;
     const newBook = new Book(
         { titulo, autor, descripcion, genero, fecha_publicacion, disponibilidad,
-            cantidad_stock, puntuacion_primedio, precio,  imagen_url
+            cantidad_stock, puntuacion_promedio, precio,  imagen_url
         });
     const bookSaved = await newBook.save();
     res.json({ message: 'Book added', value: bookSaved });
