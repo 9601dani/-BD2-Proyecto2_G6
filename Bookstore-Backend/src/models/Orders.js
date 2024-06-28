@@ -3,7 +3,10 @@ const Schema = mongose.Schema;
 const model = mongose.model;
 
 const ordersSchema = new Schema({
-
+    _id: {
+        type: Schema.Types.ObjectId,
+        auto: true
+    },
     fecha_pedido: String,
     estado: String,
     precio_total: Number,

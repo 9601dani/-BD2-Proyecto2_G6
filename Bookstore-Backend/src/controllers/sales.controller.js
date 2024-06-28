@@ -34,6 +34,10 @@ const createOrder = async (req, res) => {
     }
 
 
+    // para los libros generados
+    const libroIds = libros.map(libro => libro.libro._id);
+    const nombres = libros.map(libro => libro.libro.titulo);
+
     await new Order({
       fecha_pedido: formattedDate,
       estado: "En proceso",
@@ -44,7 +48,7 @@ const createOrder = async (req, res) => {
       metodo_pago: "Efectivo",
     }).save();
 
-    res.status(200).json({ ok: true, message: "Pedido realizado exitosamente" });
+    res.status(200).json({ ok: true, message: "Pedido realizado exitosamente" , libroIds, nombres});
   } catch (error) {
     res
       .status(500)
@@ -52,7 +56,6 @@ const createOrder = async (req, res) => {
       ok: false, message: "Error al crear el pedido",error: error.message});
   }
 };
-
 async function validateStock(books) {
   try {
     let withoutStock = [];
