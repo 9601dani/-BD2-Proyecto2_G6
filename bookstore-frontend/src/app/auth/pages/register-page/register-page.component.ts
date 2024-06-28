@@ -12,11 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class RegisterPageComponent {
 
   miFormulario: FormGroup = this.fb.group({
-    nombre:     [ '', [Validators.required] ],
-    email:      [ '', [Validators.required, Validators.email]],
-    direccion:  [ '', [Validators.required, Validators.minLength( 6 )]],
-    telefono:   [ '', [Validators.required, Validators.min( 1 )]],
-    password:   [ '', [Validators.required, Validators.minLength( 6 )]]
+    username:          [ '', [Validators.required] ],
+    complete_name:     [ '', [Validators.required, Validators.minLength( 4 )] ],
+    phone:             [ '', [Validators.required, Validators.min( 1 )]],
+    email:             [ '', [Validators.required, Validators.email]],
+    address:           [ '', [Validators.required, Validators.minLength( 6 )]],
+    password:          [ '', [Validators.required, Validators.minLength( 6 )]]
   });
 
   constructor( private fb: FormBuilder,
@@ -24,7 +25,16 @@ export class RegisterPageComponent {
     private authService: AuthService,
     private snackbar: MatSnackBar ) {}
 
-  registro(){}
+    registro(){
+      const { username, complete_name, phone, email, address, password } = this.miFormulario.value;
+
+      this.authService.registro( username, password, complete_name, email, phone, address )
+                          .subscribe( ok => {
+                            this.showSnackbar(`${this.authService.usuario.username[0].toUpperCase()}${this.authService.usuario.username.substring(1)} se ha creado con éxito`);
+
+                            this.router.navigateByUrl('/user');
+                          })
+    }
 
   showSnackbar( message: string ): void{
     this.snackbar.open( message, 'ok', {
