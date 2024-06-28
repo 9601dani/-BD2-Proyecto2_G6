@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalEdicionUsuarioComponent } from '../modal-edicion-usuario/modal-edicion-usuario.component';
 import { UsersService } from '../../services/users.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Usuario } from '../../interfaces/usuario.interface';
 
 @Component({
@@ -11,36 +10,32 @@ import { Usuario } from '../../interfaces/usuario.interface';
   styleUrls: ['./user-page.css'],
 })
 export class UsuarioPageComponent implements OnInit {
-  public usuario!:Usuario;
+  public usuario: Usuario | undefined;
 
-
-  
-  constructor(public dialog: MatDialog ,
+  constructor(
+    public dialog: MatDialog,
     private usuarioService: UsersService
-    ) {
-      //Inyeccion de dependencia
-      this.getUser();
-      //console.log("llega aqui??>")
-    }
+  ) {
+    this.getUser();
+  }
 
-    public getUser(){
-      this.usuarioService.getUserByID('667d0f588e637d0bf5ab7736').subscribe (usuario=>{
-        if(!usuario){
-          return 
-        }
+  getUser() {
+    this.usuarioService.getUserByID('667d0f588e637d0bf5ab7736').subscribe(usuario => {
+      if (usuario) {
         this.usuario = usuario;
-        console.log(usuario);
+      }
+    });
+  }
 
-      })
-    }
-  
-
-
-  // para el editar
   editarInformacion() {
-    this.dialog.open(ModalEdicionUsuarioComponent, {
+    const dialogRef = this.dialog.open(ModalEdicionUsuarioComponent, {
       width: '40%',
       height: '450px',
+      data: { usuario: this.usuario }
+    });
+
+    dialogRef.componentInstance.usuarioActualizado.subscribe(() => {
+      this.getUser();
     });
   }
 
