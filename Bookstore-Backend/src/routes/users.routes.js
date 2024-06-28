@@ -6,7 +6,7 @@ const router = express.Router();
 const api = '/api/v1/users';
 
 router.get(api, UserController.getAllUsers);
-router.get(`${api}/:id`, UserController.getUserById);
+router.get(`${api}/find/:id`, UserController.getUserById);
 router.post(`${api}/register`, UserController.createUser);
 router.put(`${api}/:id`, UserController.updateUser);
 router.get(`${api}/orders/:status`, UserController.getOrders);

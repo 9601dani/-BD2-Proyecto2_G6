@@ -77,8 +77,7 @@ async function calculateTotalPrice(books) {
   let total = 0;
   for (let i = 0; i < books.length; i++) {
     const book = books[i];
-    // ver que pasa
-    total += book.subtotal;
+    total += book.sub_total;
   }
 
   return total;
