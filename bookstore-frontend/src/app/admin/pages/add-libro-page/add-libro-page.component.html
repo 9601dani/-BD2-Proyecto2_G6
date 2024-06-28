@@ -1,7 +1,7 @@
-<!-- <h1>
-  {{ currentProducto._id ? 'Editar' : 'Agregar' }}
-  producto
-  <small *ngIf="currentProducto._id">{{ currentProducto.nombre | titlecase }}</small>
+<h1>
+  {{ currentLibro._id ? 'Editar' : 'Agregar' }}
+  libro
+  <small *ngIf="currentLibro._id">{{ currentLibro.titulo | titlecase }}</small>
 </h1>
 
 <mat-divider class="mb-2"></mat-divider>
@@ -18,14 +18,27 @@
 
           <mat-form-field class="col-12">
 
-            <mat-label>Nombre</mat-label>
+            <mat-label>Titulo</mat-label>
             <input
               matInput
               type="text"
               required
-              formControlName="nombre"
+              formControlName="titulo"
             />
 
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Autor</mat-label>
+            <mat-select
+              formControlName="autor"
+              required
+            >
+              <mat-option *ngFor="let autor of autores"
+                [value]="autor._id">
+                {{ autor.name }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field class="col-12 sm:col-6">
@@ -46,10 +59,20 @@
               type="number"
               min="1"
               required
-              formControlName="existencia"
+              formControlName="cantidad_stock"
             />
           </mat-form-field>
 
+
+          <mat-form-field class="col-12">
+
+            <mat-label>Escoge fecha de publicación</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fecha_publicacion" placeholder="Fecha">
+            <mat-hint mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+          </mat-form-field>
 
           <mat-form-field class="col-12">
 
@@ -60,19 +83,6 @@
                       formControlName="descripcion">
             </textarea>
 
-          </mat-form-field>
-
-          <mat-form-field class="col-12">
-            <mat-label>Categoria</mat-label>
-            <mat-select
-              formControlName="categoria"
-              required
-            >
-              <mat-option *ngFor="let categoria of categorias"
-                [value]="categoria._id">
-                {{ categoria.nombre }}
-              </mat-option>
-            </mat-select>
           </mat-form-field>
 
           <div class="col-12">
@@ -93,7 +103,7 @@
 
         <div class="flex justify-content-between">
           <button
-            *ngIf="currentProducto._id"
+            *ngIf="currentLibro._id"
             (click)="onDeleteProducto()"
             mat-flat-button
             color="warn"
@@ -122,9 +132,9 @@
 
     <mat-card class="justify-content-center">
 
-      <img *ngIf="!imgTemp" [src]=" productoTmp | productoImagen" mat-card-image>
+      <img *ngIf="!imgTemp" [src]=" libroTmp | libroImagen" mat-card-image>
       <img *ngIf="imgTemp" [src]="imgTemp" mat-card-image>
     </mat-card>
 
   </div>
-</div> -->
+</div>

@@ -15,8 +15,11 @@ export interface Libro {
 }
 
 export interface TipoAutor {
-  _id     : string;
-  nombre  : string;
+  _id:        string;
+  name:       string;
+  photo:      string;
+  biography:  string;
+  active:     boolean;
 }
 
 export interface ResponseLibro {
