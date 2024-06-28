@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ModalComprasComponent } from './pages/modal-compras/modal-compras.component';
 import { DatePipe } from '@angular/common';
+import { ImagenPipe } from './pipes/imagen.pipe';
 @NgModule({
   declarations: [
     ListAutoresPageComponent,
@@ -35,6 +36,7 @@ import { DatePipe } from '@angular/common';
     UsuarioPageComponent,
     ModalEdicionUsuarioComponent,
     ModalComprasComponent,
+    ImagenPipe,
   ],
   imports: [
     CommonModule,
