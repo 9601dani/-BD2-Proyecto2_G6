@@ -1,7 +1,7 @@
 export interface books {
   _id: string;
   titulo: String;
-  autor: String;
+  autor: string;
   descripcion: String;
   genero: String;
   fecha_publicacion: Date;

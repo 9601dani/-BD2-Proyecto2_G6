@@ -1,8 +1,8 @@
-<section class="text-gray-600 body-font">
+<section class="shopping-cart text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-col w-full mb-20 text-center">
       <h1
-        class="mb-2 text-3xl font-medium text-gray-900 sm:text-4xl title-font"
+        class="mb-2 text-3xl font-medium text-gray-100 sm:text-4xl title-font"
       >
         Carrito de compras
       </h1>
@@ -15,7 +15,7 @@
           <div class="container px-5 py-24 mx-auto">
             <div class="flex flex-col w-full mb-20 text-center">
               <h1
-                class="mb-2 text-3xl font-medium text-gray-900 sm:text-4xl title-font"
+                class="mb-2 text-3xl font-medium text-gray-100 sm:text-4xl title-font"
               >
                 Lista de Productos
               </h1>
@@ -25,7 +25,7 @@
               <table
                 mat-table
                 [dataSource]="this.productos"
-                class="mat-elevation-z8"
+                class="mat-elevation-z8 custom-table"
               >
                 <!-- Nombre Column -->
                 <ng-container matColumnDef="nombre">
@@ -67,6 +67,7 @@
                     <button
                       mat-raised-button
                       color="accent"
+                      class="custom-button"
                       (click)="this.eliminarId(element)"
                     >
                       Eliminar
@@ -87,42 +88,15 @@
                 </h2>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-md-10">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Dirección</mat-label>
-                  <textarea
-                    matInput
-                    placeholder="Calle, Avenida y Zona"
-                    class="custom-textarea"
-                    rows="2"
-                    [(ngModel)]="direccion"
-                  ></textarea>
-                </mat-form-field>
-              </div>
-              <div class="col-md-2">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Metodo de pago</mat-label>
-                  <input
-                    matInput
-                    type="text"
-                    placeholder="Metodo"
-                    [(ngModel)]="metodo"
-                  />
-                </mat-form-field>
-              </div>
-            </div>
           </div>
         </section>
-        <hr class="border-gray-900 border-t-1" />
-
-        <div class="row justify-content-center mt-4">
+        <hr class="border-gray-700 border-t-1" />
+        <div class="actions custom-button-container">
           <div class="col-md-6 lg:w-2/3 mt-2">
             <button
               mat-raised-button
               color="warn"
-              class="w-full"
+              class="w-full custom-button"
               (click)="this.eliminarCarrito()"
             >
               Limpiar
@@ -132,7 +106,7 @@
             <button
               mat-raised-button
               color="primary"
-              class="w-full"
+              class="w-full custom-button"
               (click)="pagar()"
             >
               Pagar
@@ -142,7 +116,7 @@
       </div>
     </ng-container>
   </div>
-  <hr class="border-gray-900 border-t-1" />
+  <hr class="border-gray-700 border-t-1" />
 
   <div class="porSiElimina" *ngIf="this.eliminado">
     <ngb-alert [dismissible]="false">
@@ -150,70 +124,75 @@
     </ngb-alert>
   </div>
 
+  <div class="alert-section" *ngIf="this.todoMal">
+    <ngb-alert [type]="'error'" [dismissible]="false">
+      <strong>Error</strong> No se pudo ejecutar la transacción
+    </ngb-alert>
+  </div>
+
   <div class="porSitodoBien" *ngIf="this.todoBien">
     <ngb-alert [type]="'success'" [dismissible]="false">
-      <strong>Bien</strong> Compra realizada con exito. Puede dejar una opinion
+      <strong>Bien</strong> Compra realizada con éxito. Puede dejar una opinión
     </ngb-alert>
 
-    <div class="row">
-      <!--generacion de cards-->
+    <!--generacion de cards-->
 
-      <div class="row">
-        <table class="table table-striped table-dark">
-          <thead>
-            <tr>
-              <th scope="col">No.</th>
-              <th scope="col">Nombre de libro</th>
-              <th scope="col">Resenia</th>
-              <th scope="col">Cantidad de calificacion</th>
-              <th scope="col">Enviar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let valores of this.librosComprados">
-              <td>{{ valores._id }}</td>
-              <td>{{ valores.titulo }}</td>
-              <td>
-                <div class="col-md-10">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Descripcion</mat-label>
-                    <textarea
-                      matInput
-                      placeholder="Descripcion"
-                      class="custom-textarea"
-                      rows="2"
-                      [(ngModel)]="valores.review"
-                      name="review-{{ valores._id }}"
-                    ></textarea>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <mat-slider
-                  min="0"
-                  max="5"
-                  step="0.1"
-                  showTickMarks
-                  discrete
-                  [displayWith]="formatLabel"
-                >
-                  <input matSliderThumb [(ngModel)]="valores.ratings" #slider />
-                </mat-slider>
-              </td>
-              <td>
-                <button
-                  mat-raised-button
-                  color="accent"
-                  (click)="this.enviarReview(valores._id)"
-                >
-                  Enviar Resenia
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <hr class="border-gray-900 border-t-1" />
-      </div>
+    <div class="row">
+      <table class="table table-striped table-dark custom-review-table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Nombre de libro</th>
+            <th scope="col">Resenia</th>
+            <th scope="col">Cantidad de calificacion</th>
+            <th scope="col">Enviar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let valores of this.librosComprados">
+            <td>{{ valores._id }}</td>
+            <td>{{ valores.titulo }}</td>
+            <td>
+              <div class="col-md-10">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Descripcion</mat-label>
+                  <textarea
+                    matInput
+                    placeholder="Descripcion"
+                    class="custom-textarea"
+                    rows="2"
+                    [(ngModel)]="valores.review"
+                    name="review-{{ valores._id }}"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </td>
+            <td>
+              <mat-slider
+                min="0"
+                max="5"
+                step="0.1"
+                showTickMarks
+                discrete
+                [displayWith]="formatLabel"
+              >
+                <input matSliderThumb [(ngModel)]="valores.ratings" #slider />
+              </mat-slider>
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                color="accent"
+                class="custom-button"
+                (click)="this.enviarReview(valores._id)"
+              >
+                Enviar Resenia
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr class="border-gray-700 border-t-1" />
     </div>
   </div>
 </section>

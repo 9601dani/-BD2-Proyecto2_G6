@@ -17,7 +17,7 @@ interface tipoFiltro {
 @Component({
   selector: 'app-list-libros-page',
   templateUrl: './list-libros-page.component.html',
-  styles: [],
+  styleUrls: ['./listado.css'],
 })
 export class ListLibrosPageComponent implements OnInit {
   listadoAutores!: libros[];
@@ -89,7 +89,6 @@ export class ListLibrosPageComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
-      console.log(this.dataSource.filteredData);
     });
   }
 }

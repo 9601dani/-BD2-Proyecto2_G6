@@ -20,7 +20,7 @@ export class CarritoService {
 
   carrito$ = this.carritoSubject.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private usuarioServicio: AuthService) {
     //carga todo en local
     this.cargarDetalleVentaLocal();
   }

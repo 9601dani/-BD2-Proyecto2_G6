@@ -1,5 +1,131 @@
-  .star-icon {
-    width: 50px; /* Ancho deseado */
+
+  .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.image-section, .reviews-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.info-table th, .info-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.rating, .specific-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.star-icon {
+  margin-right: 5px;
+     width: 50px; /* Ancho deseado */
     height: 50px; /* Alto deseado */
     fill: orange; /* Color de relleno de la estrella */
-  }
+}
+
+.reviews {
+  margin-left: 10px;
+}
+
+.review {
+  margin-bottom: 20px;
+}
+
+.reviews-section {
+  padding: 20px;
+  background-color: #585555;
+  border-radius: 8px;
+}
+
+.reviews-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.review {
+  margin-bottom: 20px;
+}
+
+.example-card {
+  margin-bottom: 10px;
+}
+
+.specific-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.specific-rating h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #555;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+
+.reviews-count {
+  margin-left: 10px;
+  font-size: 1rem;
+  color: #777;
+}
+
+.review-text {
+  font-size: 1rem;
+  color: #444;
+  text-align: center;
+}
+
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #333;
+}
+
+.info-table th, .info-table td {
+  padding: 10px;
+  text-align: left;
+  color: #fff; /* Color de texto blanco */
+}
+
+.info-table th {
+  background-color: #555; /* Color de fondo gris oscuro */
+}
+
+.info-table td {
+  background-color: #444; /* Color de fondo gris */
+}
+
+.disponibilidad {
+  color: green; /* Color verde para disponibilidad */
+}
+
+.no-disponible {
+  color: red; /* Color rojo para no disponibilidad */
+}

@@ -32,3 +32,250 @@
     max-width: 16.666667%;
   }
 }
+
+
+.cart-section {
+  background-color: #292828;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.cart-section h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.mat-elevation-z8 {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.total {
+  text-align: right;
+  font-size: 1.2rem;
+  color: #eae9e9;
+  font-weight: bold;
+}
+
+.custom-textarea {
+  width: 100%;
+}
+
+.row {
+  margin: 10px 0;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.alert-section {
+  margin: 20px 0;
+}
+
+.table-responsive {
+  margin: 20px 0;
+}
+
+
+/* Custom CSS */
+body {
+  background-color: #333;
+  color: #fff;
+}
+
+.shopping-cart {
+  background-color: #444;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.shopping-cart h1,
+.shopping-cart h2 {
+  color: #fff;
+}
+
+.custom-table th,
+.custom-table td {
+  color: #fff;
+  background-color: #555;
+}
+
+.custom-review-table th,
+.custom-review-table td {
+  color: #fff;
+  background-color: #666;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.custom-textarea {
+  background-color: #666;
+  color: #fff;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mat-form-field .mat-label {
+  color: #fff;
+}
+
+.mat-form-field .mat-input-element {
+  color: #fff;
+}
+
+.mat-form-field .mat-hint {
+  color: #aaa;
+}
+
+.mat-raised-button {
+  margin-top: 10px;
+}
+
+.mat-raised-button.mat-warn {
+  background-color: #d32f2f;
+  color: #fff;
+}
+
+.mat-raised-button.mat-primary {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.mat-raised-button.mat-accent {
+  background-color: #e91e63;
+  color: #fff;
+}
+
+.custom-button {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.custom-button:hover {
+  background-color: #666;
+  transform: scale(1.05);
+}
+
+.custom-button:active {
+  background-color: #777;
+  transform: scale(0.95);
+}
+
+.custom-button.mat-warn {
+  background-color: #d32f2f;
+}
+
+.custom-button.mat-warn:hover {
+  background-color: #e53935;
+}
+
+.custom-button.mat-primary {
+  background-color: #1976d2;
+}
+
+.custom-button.mat-primary:hover {
+  background-color: #1e88e5;
+}
+
+.custom-button.mat-accent {
+  background-color: #e91e63;
+}
+
+.custom-button.mat-accent:hover {
+  background-color: #f06292;
+}
+
+
+.custom-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+.custom-button {
+  margin: 0 10px; /* Espacio horizontal entre botones */
+  background-color: #333; /* Color de fondo gris oscuro */
+  color: white; /* Texto en color blanco */
+  border: none; /* Sin borde */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.custom-button:hover {
+  background-color: #555; /* Color de fondo más oscuro al pasar el mouse */
+}
+
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.alert-section {
+  background-color: #f8d7da; /* Color de fondo para alertas de error */
+  color: #721c24; /* Color de texto para alertas de error */
+  border: 1px solid #f5c6cb; /* Borde para alertas de error */
+  padding: 15px; /* Espaciado interno */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+.porSiElimina {
+  background-color: #d4edda; /* Color de fondo para alertas de éxito */
+  color: #155724; /* Color de texto para alertas de éxito */
+  border: 1px solid #c3e6cb; /* Borde para alertas de éxito */
+  padding: 15px; /* Espaciado interno */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+.porSitodoBien {
+  background-color: #d1ecf1; /* Color de fondo para alertas informativas */
+  color: #0c5460; /* Color de texto para alertas informativas */
+  border: 1px solid #bee5eb; /* Borde para alertas informativas */
+  padding: 15px; /* Espaciado interno */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+
+.custom-review-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #333;
+  color: #fff;
+}
+
+.custom-review-table th,
+.custom-review-table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.custom-review-table th {
+  background-color: #555;
+  border-bottom: 2px solid #444;
+}
+
+.custom-review-table td {
+  border-bottom: 1px solid #444;
+}
+
+.custom-textarea {
+  width: 100%;
+}
+
+.custom-button {
+  color: #fff;
+}
+
+.custom-button:hover {
+  background-color: #555;
+}

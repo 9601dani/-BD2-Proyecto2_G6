@@ -5,6 +5,7 @@ import { reviews } from '../../interfaces/reviews';
 import { books } from '../../interfaces/books';
 import { ReviewsService } from '../../services/reviews.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart-page',
@@ -18,6 +19,7 @@ export class CartPageComponent implements OnInit {
   sumaTotal!: number;
   eliminado: boolean = false;
   todoBien: boolean = false;
+  todoMal: boolean = false;
 
   productos: detalle[] = [];
   direccion!: string;
@@ -70,16 +72,21 @@ export class CartPageComponent implements OnInit {
     this.carritoServicio
       .pagar(this.sumaTotal, this.direccion, this.metodo)
       .subscribe((response: any) => {
-        //limpia final
-        this.carritoServicio.limpiarTodo();
-        this.todoBien = true;
+        if (response instanceof HttpErrorResponse) {
+          this.todoMal = true;
+          this.carritoServicio.limpiarTodo();
+        } else {
+          //limpia final
+          this.carritoServicio.limpiarTodo();
+          this.todoBien = true;
 
-        for (let i = 0; i < response.libroIds.length; i++) {
-          const libroComprado = {
-            _id: response.libroIds[i],
-            titulo: response.nombres[i],
-          };
-          this.librosComprados.push(libroComprado);
+          for (let i = 0; i < response.libroIds.length; i++) {
+            const libroComprado = {
+              _id: response.libroIds[i],
+              titulo: response.nombres[i],
+            };
+            this.librosComprados.push(libroComprado);
+          }
         }
       });
   }
@@ -91,7 +98,7 @@ export class CartPageComponent implements OnInit {
     if (libro) {
       const nuevaResenia = {
         id_book: id,
-        id_user: this.usuarioServicio.usuario._id,
+        id_user: '667d978aa237593ddd53bf8e',
         rating: libro.ratings.toString(),
         review: libro.review,
       };

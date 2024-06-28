@@ -5,6 +5,9 @@ import { usuarios } from 'src/app/models/usuarios';
 import { books } from '../../interfaces/books';
 import { PuntuacionService } from '../../services/puntuacion.service';
 import { reviews } from '../../interfaces/reviews';
+import { AuthorsService } from '../../services/authors.service';
+import { autores } from 'src/app/models/autores';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-libro-page',
@@ -13,13 +16,19 @@ import { reviews } from '../../interfaces/reviews';
 })
 export class LibroPageComponent implements OnInit {
   libro!: books;
+  autor!: autores;
+  usuarios!: usuarios[];
   puntuaciones!: reviews[];
   cantidadPuntuacion!: Number;
   ArrayPuntuacion: number[] = [];
   ArregloEspecificoPuntuaciones: Number[][] = [];
   panelAbierto: boolean = false;
 
-  constructor(private puntuacionServicio: PuntuacionService) {}
+  constructor(
+    private puntuacionServicio: PuntuacionService,
+    private autoresServicio: AuthorsService,
+    private usuariosServicio: UsersService
+  ) {}
   // para la puntuacion
   verEstrellas() {
     if (this.libro.puntuacion_promedio !== undefined) {
@@ -32,8 +41,6 @@ export class LibroPageComponent implements OnInit {
     }
   }
 
-  //funcion para el filtrado de los libros
-  buscarLibto() {}
   // funcuin para las puntuacions
 
   obtenerPuntuaciones(id: string) {
@@ -43,6 +50,12 @@ export class LibroPageComponent implements OnInit {
         console.log(elementos);
         this.puntuaciones = elementos;
       });
+  }
+
+  // funcion que retorna el nombre
+
+  nombreDeterminado(id: string) {
+    return this.usuariosServicio.getUserByID(id).toPromise();
   }
 
   // funcuin para las puntuacions
@@ -62,8 +75,11 @@ export class LibroPageComponent implements OnInit {
   ngOnInit(): void {
     this.libro = history.state.item;
     this.obtenerPuntuaciones(this.libro._id);
-    console.log(this.puntuaciones);
-
+    this.autoresServicio
+      .getAutorByID(this.libro.autor)
+      .subscribe((elemento: any) => {
+        this.autor = elemento;
+      });
     this.verEstrellas();
   }
 }
