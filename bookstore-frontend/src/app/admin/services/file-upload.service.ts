@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Autor, FileUploadResponse } from '../interfaces/autor.interface';
 import { Observable, tap } from 'rxjs';
+import { Libro } from '../interfaces/libro.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,19 @@ export class FileUploadService {
 
   actualizarImagenAutor( autor: Autor, archivo: File ) {
     const url: string = `${ this.baseUrl }/upload/update/${ autor.photo }`;
+    const formData = new FormData();
+    formData.append('file', archivo);
+
+    return this.http.put<FileUploadResponse>( url, formData )
+                    .pipe(
+                      tap( res => {
+                        this._nombreArchivo = `${ res.fileName! }`;
+                      }),
+                    );
+  }
+
+  actualizarImagenLibro( libro: Libro, archivo: File ) {
+    const url: string = `${ this.baseUrl }/upload/update/${ libro.imagen_url }`;
     const formData = new FormData();
     formData.append('file', archivo);
 

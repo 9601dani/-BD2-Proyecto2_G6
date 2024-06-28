@@ -1,1 +1,49 @@
-<p>book-card works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ libro.titulo | titlecase }}</mat-card-title>
+    <mat-card-subtitle *ngIf="libro.cantidad_stock > 5; else pocasUnidades" style="color: green">Disponible</mat-card-subtitle>
+    <ng-template #pocasUnidades>
+      <mat-card-subtitle style="color: red">Pocas unidades</mat-card-subtitle>
+    </ng-template>
+  </mat-card-header>
+
+  <img mat-card-image [src]="imagenUrl" [alt]="libro.titulo">
+
+  <mat-card-content class="mt-2">
+    <p>
+      <strong>Precio</strong> {{ libro.precio | currency: 'GTQ': 'symbol-narrow' }}
+      <br>
+      <strong>Existencia</strong> {{ libro.cantidad_stock }} Unidades
+      <br>
+      <mat-chip-listbox>
+        <mat-chip>
+          {{ libro.genero }}
+        </mat-chip>
+        <mat-chip>
+          {{ libro.puntuacion_promedio }} estrellas
+        </mat-chip>
+      </mat-chip-listbox>
+    </p>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions>
+
+    <div class="grid">
+
+      <div class="col-12">
+        <div class="flex justify-content-right">
+          <span class="spacer"></span>
+          <button mat-button
+                  [routerLink]="['/admin/edit-libro', libro._id]"
+                  mat-raised>
+            <mat-icon>more_horiz</mat-icon>
+              Más
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card-actions>
+
+</mat-card>

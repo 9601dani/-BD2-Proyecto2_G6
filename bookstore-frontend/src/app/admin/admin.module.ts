@@ -20,6 +20,9 @@ import { PedidoCardComponent } from './components/pedido-card/pedido-card.compon
 import { StartsCardComponent } from './components/starts-card/starts-card.component';
 import { ReviewCardComponent } from './components/review-card/review-card.component';
 import { AutorImagenPipe } from './pipes/autor-imagen.pipe';
+import { ConfirmDialogLibroComponent } from './components/confirm-dialog-libro/confirm-dialog-libro.component';
+import { LibroImagenPipe } from './pipes/libro-imagen.pipe';
+import { ConfirmDialogOrderComponent } from './components/confirm-dialog-order/confirm-dialog-order.component';
 
 
 
@@ -41,7 +44,10 @@ import { AutorImagenPipe } from './pipes/autor-imagen.pipe';
     PedidoCardComponent,
     StartsCardComponent,
     ReviewCardComponent,
-    AutorImagenPipe
+    AutorImagenPipe,
+    ConfirmDialogLibroComponent,
+    LibroImagenPipe,
+    ConfirmDialogOrderComponent
   ],
   imports: [
     CommonModule,
