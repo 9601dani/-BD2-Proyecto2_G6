@@ -22,6 +22,7 @@ import { ReviewCardComponent } from './components/review-card/review-card.compon
 import { AutorImagenPipe } from './pipes/autor-imagen.pipe';
 import { ConfirmDialogLibroComponent } from './components/confirm-dialog-libro/confirm-dialog-libro.component';
 import { LibroImagenPipe } from './pipes/libro-imagen.pipe';
+import { ConfirmDialogOrderComponent } from './components/confirm-dialog-order/confirm-dialog-order.component';
 
 
 
@@ -45,7 +46,8 @@ import { LibroImagenPipe } from './pipes/libro-imagen.pipe';
     ReviewCardComponent,
     AutorImagenPipe,
     ConfirmDialogLibroComponent,
-    LibroImagenPipe
+    LibroImagenPipe,
+    ConfirmDialogOrderComponent
   ],
   imports: [
     CommonModule,

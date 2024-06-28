@@ -1,1 +1,41 @@
-<p>pedido-card works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Orden#{{ order._id }}</mat-card-title>
+    <mat-card-subtitle style="color: orange">Comprador {{ nombreComprador }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="mt-2">
+    <p>
+      <strong>Total Gastado</strong> {{ order.precio_total | currency: 'GTQ': 'symbol-narrow' }}
+      <br>
+      <strong>Direccion Envio</strong> {{ order.direccion_envio }}
+      <br>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let item of nombreLibros; let i = index">
+          {{ item | titlecase }} - {{ order.libros[i].cantidad | i18nPlural: orderMap }}
+        </mat-chip>
+      </mat-chip-listbox>
+    </p>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions>
+
+    <div class="grid">
+
+      <div class="col-12">
+        <div class="flex justify-content-right">
+          <span class="spacer"></span>
+          <button mat-button
+                  (click)="actualizarEstado()"
+                  mat-raised>
+            <mat-icon>update</mat-icon>
+              Actualizar estado Producto
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card-actions>
+
+</mat-card>
