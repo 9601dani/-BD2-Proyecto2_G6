@@ -3,15 +3,14 @@ const Shema = require('mongoose').Schema;
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password) {
-        res.status(400).json({ message: 'El email y la contraseña son requeridos', 'ok': false});
+    if (!password) {
+        res.status(400).json({ message: 'la contraseña es requerida', 'ok': false});
         return;
     }
-    try {
-        const user = await User.findOne({ email });
+        let user = await User.findOne({ email });
 
         if (!user) {
-            const user = await User.findOne({ username: email });
+            user = await User.findOne({ username: email });
             if (!user) {
                 res.status(404).json({ message: 'No existe el usuario', 'ok': false});
                 return
@@ -21,18 +20,14 @@ const login = async (req, res) => {
                 return;
             }
             res.status(200).json({ user, 'ok': true });
+            return;
         }
 
         if (user.password !== password) {
             res.status(401).json({ message: 'Contraseña incorrecta', 'ok': false});
             return;
         }
-
         res.status(200).json({ user, 'ok': true });
-
-    } catch (error) {
-        res.status(500).json({ message: 'Error en el servidor', error: error.message, 'ok': false});
-    }
 
 }
 
