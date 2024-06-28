@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/auth/interfaces/user.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   ]
 })
 export class LayoutPageComponent {
-  //usuario:Usuario = this.authService.usuario;
+  usuario:Usuario = this.authService.usuario;
 
   public sidebarItems = [
     {
