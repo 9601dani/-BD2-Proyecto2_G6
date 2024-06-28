@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ReporteExit } from '../../interfaces/reporte.interface';
+import { ReporteService } from '../../services/reporte.service';
 
 @Component({
   selector: 'app-top-libros-page',
@@ -6,6 +8,16 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class TopLibrosPageComponent {
+export class TopLibrosPageComponent implements OnInit {
+  columnas: string[] = ['No.', 'Total de Ventas', 'Nombre del Libro'];
+  reportes: ReporteExit[] = [];
+
+  constructor( private reporteService: ReporteService ){}
+
+  ngOnInit(): void {
+    this.reporteService.getTopBooks().subscribe( res => {
+      this.reportes = res
+    })
+  }
 
 }
