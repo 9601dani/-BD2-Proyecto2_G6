@@ -33,6 +33,7 @@ export class AddLibroPageComponent  {
           autor:              new FormControl<string>('', {
                                   validators: [Validators.required]
                               }),
+          genero:             ['', [Validators.required, Validators.minLength(4)]],
           descripcion:        ['', [Validators.required, Validators.minLength(10)]],
           fecha_publicacion:  ['', [Validators.required]],
           cantidad_stock:     new FormControl<number>(1, {

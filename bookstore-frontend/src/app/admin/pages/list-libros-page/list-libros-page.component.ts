@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Libro } from '../../interfaces/libro.interface';
+import { LibroService } from '../../services/libro.service';
+
 
 @Component({
   selector: 'app-list-libros-page',
@@ -6,6 +9,16 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class ListLibrosPageComponent {
+export class ListLibrosPageComponent implements OnInit {
 
+  public libros: Libro[] = [];
+
+  constructor( private librosService: LibroService ) {}
+
+  ngOnInit(): void {
+    this.librosService.getLibros()
+      .subscribe( libros =>{
+        this.libros = libros
+      } );
+  }
 }
