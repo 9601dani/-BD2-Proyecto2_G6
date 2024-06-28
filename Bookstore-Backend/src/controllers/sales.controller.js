@@ -38,13 +38,22 @@ const createOrder = async (req, res) => {
     const libroIds = libros.map(libro => libro.libro._id);
     const nombres = libros.map(libro => libro.libro.titulo);
 
+    const librosFinales = libros.map(libro => ({
+      _id: libro.libro._id, // Mantener el ID original del libro
+      cantidad: libro.cantidad ,
+      subtotal: libro.sub_total ,
+      nombre: libro.libro.titulo
+    }));
+
+    const usuario = await Users.findById(id_usuario);
+
     await new Order({
       fecha_pedido: formattedDate,
       estado: "En proceso",
       precio_total: total_price,
       id_usuario,
-      direccion_envio,
-      libros: libros,
+      direccion_envio:usuario.address,
+      libros: librosFinales,
       metodo_pago: "Efectivo",
     }).save();
 

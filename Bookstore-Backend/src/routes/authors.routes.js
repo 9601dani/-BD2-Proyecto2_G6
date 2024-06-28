@@ -10,5 +10,6 @@ router.get(`${api}/active`, AuthorsController.getAuthorsActive);
 router.get(`${api}/find/:id`, AuthorsController.getAuthorById);
 router.delete(`${api}/delete/:id`, AuthorsController.deleteAuthor);
 router.put(`${api}/update/:id`, AuthorsController.updateAuthor);
+router.get(`${api}/name/:name`, AuthorsController.getAuthorByName);
 
 module.exports = router;

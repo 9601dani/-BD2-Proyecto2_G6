@@ -80,11 +80,11 @@ const topBooks = async (req, res) => {
     try {
         const top_books = await Order.aggregate([
             { $unwind: '$libros' },
-            { $group: { _id: '$libros.id_libro', total: { $sum: '$libros.cantidad' } } },
+            { $group: { _id: '$libros._id', total: { $sum: '$libros.cantidad_stock' } } },
             { $sort: { total: -1 } },
             { $limit: 10 }
         ]);
-
+        
         if (!top_books || top_books.length === 0) {
             res.status(404).json({ message: 'Libros no encontrados' });
             return;
@@ -92,7 +92,7 @@ const topBooks = async (req, res) => {
 
         const bookIds = top_books.map(book => book._id);
         const books = await Book.find({ _id: { $in: bookIds } })
-            .populate('author')
+            .populate('autor')
             .exec();
 
         const result = top_books.map(book => {

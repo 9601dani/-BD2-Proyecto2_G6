@@ -34,11 +34,17 @@ const updateAuthor = async (req, res) => {
     res.json({ updated: !!updated });
 }
 
+const getAuthorByName = async (req, res) => {
+    const author = await Author.find( { name: {$regex: req.params.name, $options: "i"} } );
+    res.json(author);
+}
+
 module.exports = {
     getAll,
     getAuthorsActive,
     getAuthorById,
     addAuthor,
     deleteAuthor,
-    updateAuthor
+    updateAuthor,
+    getAuthorByName
 }

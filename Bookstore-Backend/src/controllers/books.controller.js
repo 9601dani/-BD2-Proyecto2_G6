@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
 }
 
 const getBookById = async (req, res) => {
-    const book = await Book.findById(req.params.id);
+    const book = await Book.find({ _id: req.params.id });
     res.json(book);
 }
 
