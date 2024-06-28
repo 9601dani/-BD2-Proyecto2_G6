@@ -5,7 +5,6 @@ const Users = require("../models/Users");
 const createOrder = async (req, res) => {
   try {
     const { id_usuario, libros, direccion_envio } = req.body;
-
     if (!id_usuario || !libros) {
       return res.status(400).json({
         ok: false,
@@ -34,6 +33,11 @@ const createOrder = async (req, res) => {
         .json({ ok: false, message: "Error al actualizar stock" });
     }
 
+
+    // para los libros generados
+    const libroIds = libros.map(libro => libro.libro._id);
+    const nombres = libros.map(libro => libro.libro.titulo);
+
     await new Order({
       fecha_pedido: formattedDate,
       estado: "En proceso",
@@ -44,7 +48,7 @@ const createOrder = async (req, res) => {
       metodo_pago: "Efectivo",
     }).save();
 
-    res.status(200).json({ ok: true, message: "Pedido realizado exitosamente" });
+    res.status(200).json({ ok: true, message: "Pedido realizado exitosamente" , libroIds, nombres});
   } catch (error) {
     res
       .status(500)
@@ -52,16 +56,15 @@ const createOrder = async (req, res) => {
       ok: false, message: "Error al crear el pedido",error: error.message});
   }
 };
-
 async function validateStock(books) {
   try {
     let withoutStock = [];
     for (let i = 0; i < books.length; i++) {
       const book = books[i];
-      const bookDB = await Books.findById(book.id_libro);
-      if (bookDB.cantidad_stockc < book.cantidad) {
+      const bookDB = await Books.findById(book.libro._id);
+      if (bookDB.cantidad_stock < book.cantidad) {
         withoutStock.push(bookDB.titulo);
-      }
+      } 
     }
 
     return withoutStock;
@@ -78,6 +81,30 @@ async function calculateTotalPrice(books) {
   }
 
   return total;
+}
+
+async function updateStock(books) {
+  try {
+    for (let i = 0; i < books.length; i++) {
+      const book = books[i];
+      const updated = await Books.updateOne(
+        {
+          _id: book.libro._id,
+        },
+        {
+           $inc: { cantidad_stock: -book.cantidad },
+        }
+      );
+
+      if (updated.matchedCount !== 1) {
+        return false;
+      }
+    }
+
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
 
 async function updateStock(books) {
