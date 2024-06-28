@@ -22,7 +22,9 @@
             <tr *ngFor="let order of orders">
               <td>{{ order.fecha_pedido }}</td>
               <td>{{ order.estado }}</td>
-              <td>{{ order.precio_total | currency:'EUR':'symbol':'1.2-2' }}</td>
+              <td>
+                {{ order.precio_total | currency : "EUR" : "symbol" : "1.2-2" }}
+              </td>
               <td>{{ order.direccion_envio }}</td>
               <td>{{ order.metodo_pago }}</td>
               <td>
@@ -30,7 +32,14 @@
                   <li *ngFor="let libro of order.libros">
                     <div class="libro-item">
                       <span class="libro-title">{{ libro._id }}</span>
-                      <span class="libro-info">{{ libro.cantidad }} x (Subtotal: {{ libro.subtotal | currency:'EUR':'symbol':'1.2-2' }})</span>
+                      <span class="libro-title">{{ libro.nombre }}</span>
+                      <span class="libro-info"
+                        >{{ libro.cantidad }} x (Subtotal:
+                        {{
+                          libro.subtotal
+                            | currency : "EUR" : "symbol" : "1.2-2"
+                        }})</span
+                      >
                     </div>
                   </li>
                 </ul>

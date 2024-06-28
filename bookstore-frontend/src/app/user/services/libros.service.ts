@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { books } from '../interfaces/books';
@@ -25,5 +25,11 @@ export class LibrosService {
     return this.http.get<books>(
       `${this.baseUrl}/books/filter/${tipo}/${valor}`
     );
+  }
+
+  obtenerLibroId(id: string): Observable<books | undefined> {
+    return this.http
+      .get<books>(`${this.baseUrl}/books/${id}`)
+      .pipe(catchError((error) => of(undefined)));
   }
 }

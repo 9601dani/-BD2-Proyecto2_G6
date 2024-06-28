@@ -35,5 +35,7 @@ export class ModalComprasComponent implements OnInit {
   agregarAlCarro(libros: books, cantidad: number, precio: number) {
     this.carritoServicio.agregarCarrito(libros, precio, cantidad);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.valores);
+  }
 }
