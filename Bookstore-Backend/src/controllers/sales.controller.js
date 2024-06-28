@@ -34,6 +34,10 @@ const createOrder = async (req, res) => {
     }
 
 
+    // para los libros generados
+    const libroIds = libros.map(libro => libro.libro._id);
+    const nombres = libros.map(libro => libro.libro.titulo);
+
     await new Order({
       fecha_pedido: formattedDate,
       estado: "En proceso",
@@ -44,7 +48,7 @@ const createOrder = async (req, res) => {
       metodo_pago: "Efectivo",
     }).save();
 
-    res.status(200).json({ ok: true, message: "Pedido realizado exitosamente" });
+    res.status(200).json({ ok: true, message: "Pedido realizado exitosamente" , libroIds, nombres});
   } catch (error) {
     res
       .status(500)
@@ -75,7 +79,7 @@ async function calculateTotalPrice(books) {
   for (let i = 0; i < books.length; i++) {
     const book = books[i];
     // ver que pasa
-    total += book.subtotal;
+    total += book.sub_total;
   }
 
   return total;

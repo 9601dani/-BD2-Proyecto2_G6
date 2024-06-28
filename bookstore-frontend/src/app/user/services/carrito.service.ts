@@ -42,13 +42,23 @@ export class CarritoService {
 
   // Método para vaciar el carrito y eliminar datos de localStorage
   agregarCarrito(libro: books, total: number, cantidad: number) {
+    //en caso ya este ese elemento
+
     if (cantidad > 0) {
-      const detalleVentaAsignado: detalle = {
-        libro: libro,
-        sub_total: total,
-        cantidad: cantidad,
-      };
-      this._carrito.push(detalleVentaAsignado);
+      const encontrado = this._carrito.find(
+        (item) => item.libro._id === libro._id
+      );
+      if (!encontrado) {
+        const detalleVentaAsignado: detalle = {
+          libro: libro,
+          sub_total: total,
+          cantidad: cantidad,
+        };
+        this._carrito.push(detalleVentaAsignado);
+      } else {
+        encontrado.sub_total += total;
+        encontrado.cantidad += cantidad;
+      }
       this.guardarDetalleVentaLocal();
     }
   }
@@ -83,6 +93,7 @@ export class CarritoService {
       fecha_pedido: fechaActual,
       estado: 'en proceso',
       precio_total: precioTotal,
+      // aca falta el id del usuario logeado
       id_usuario: '667d978aa237593ddd53bf8e',
       direccion_envio: direccion_envio,
       metodo_pago: metodo_pago,

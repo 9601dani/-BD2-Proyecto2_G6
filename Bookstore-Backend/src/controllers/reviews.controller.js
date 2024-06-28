@@ -2,26 +2,29 @@ const Review = require('../models/Reviews');
 const Book = require('../models/Books');
 
 const addReview = async (req, res) => {
-    const { book_id, user_id, review, rating } = req.body;
-    const newReview = new Review({ book_id, user_id, review, rating });
+    const { id_book, id_user, review, rating } = req.body; 
+    const newReview = new Review({ id_book: id_book, id_user: id_user, review, rating });
     const reviewSaved = await newReview.save();
+    
 
     // Update book rating
     const bookRating = await Review.aggregate(
         [
-            { $match: { book_id: book_id } },
+            { $match: { id_book: id_book } },
             { $group: { _id: null, avg: { $avg: "$rating" } } }
         ]
     );
+    console.log("rating", bookRating[0]);
 
-    await Book.updateOne({ _id: book_id }, { puntuacion_promedio: bookRating[0].avg });
+    await Book.updateOne({ _id: id_book }, { puntuacion_promedio: bookRating[0].avg });
+    console.log("vamos bien 2");
 
     res.json({ message: 'Review added', value: reviewSaved });
 }
 
 const getReviewsByBookId = async (req, res) => {
     // cambio de nombre
-    const reviews = await Review.find({ book_id: req.params.id });
+    const reviews = await Review.find({ id_book: req.params.id });
     res.json(reviews);
 }
 
